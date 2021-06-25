@@ -20,7 +20,7 @@ export class MenuComponent implements OnInit {
           return false; // prevent bubbling
         },
         ['INPUT', 'TEXTAREA', 'SELECT','HTML'], // allow shortcut execution in these html elements
-        'atalho' // shortcut name
+        'gerar cpf' // shortcut name
       )
     );
   }
