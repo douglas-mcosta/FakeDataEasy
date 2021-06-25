@@ -1,0 +1,9 @@
+{
+    "name": "Fake Data Easy",
+    "version": "1.0",
+    "description": "Gerar texto para validação de formulários",
+    "manifest_version": 2,
+    "browser_action": {
+        "default_popup": "index.html"
+    }
+}
