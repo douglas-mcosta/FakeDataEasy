@@ -1,0 +1,34 @@
+<div class="container container-menu">
+    <div class="row">
+        <p class="text-center">
+            <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/2048px-Angular_full_color_logo.svg.png">
+        </p>
+    </div>
+    <div>
+        <table class="table table-hover table-sm">
+            <tbody>
+                <tr>
+                    <td>Gerar CPF <br> <small *ngIf="cpf">{{cpf}} <i class="fa fa-check"></i></small></td>
+                    <td><button class="btn btn-sm" (click)="GenerateCPF()"><i class="fa fa-clipboard"></i></button></td>
+                    <td><button class="btn btn-sm"><i class="fa fa-arrow-circle-right"></i></button></td>
+                </tr>
+                <tr>
+                    <td>Gerar CNPJ</td>
+                    <td><button class="btn btn-sm"><i class="fa fa-clipboard"></i></button></td>
+                    <td><button class="btn btn-sm"><i class="fa fa-arrow-circle-right"></i></button></td>
+                </tr>
+                <tr>
+                    <td>Gerar Cartão de Credito</td>
+                    <td><button class="btn btn-sm"><i class="fa fa-clipboard"></i></button></td>
+                    <td><button class="btn btn-sm"><i class="fa fa-arrow-circle-right"></i></button></td>
+                </tr>
+                <tr>
+                    <td>Gerar Nome</td>
+                    <td><button class="btn btn-sm"><i class="fa fa-clipboard"></i></button></td>
+                    <td><button class="btn btn-sm"><i class="fa fa-arrow-circle-right"></i></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

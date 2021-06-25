@@ -1,0 +1,10 @@
+.logo{
+    width: 100px;
+    align-items: center;
+}
+
+.container-menu{
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+}
