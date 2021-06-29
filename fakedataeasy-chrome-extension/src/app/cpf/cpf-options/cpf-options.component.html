@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row pt-3">
+        <p class="text-center">
+            <img class="logo" src="assets/FakeDataEasy2.png">
+        </p>
+    </div>
+
+    <form (ngSubmit)="GerarCPF()" [formGroup]="cpfForm">
+
+    <div class="row pt-3">
+        <div class="col-md-12">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="CPF" formControlName="cpf">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-info" type="submit"><i class="fas fa-undo"></i> Gerar</button>
+                </div>
+              </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12 text-white pt-2 text-center">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="cpfType" id="cpfType" value="1" formControlName="cpfType">
+                    <label class="form-check-label">Com Pontos</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="cpfType" id="cpfType" value="0" formControlName="cpfType">
+                    <label class="form-check-label">Sem Pontos</label>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+<div class="row pt-2 pb-3">
+    <div class="col-md-12 text-center">
+        <a class="btn btn-sm btn-outline-secondary m-1" [routerLink]="['/home']"><i class="fa fa-arrow-circle-left"></i></a>
+        <button class="btn btn-sm btn-outline-info" type="button" (click)="ValidateCPF()"><i class="fas fa-check-circle"></i> Validar</button>
+        <button class="btn btn-sm btn-outline-success m-1" type="button"><i class=" fas fa-file-excel"></i> Exportar Lista</button>
+    </div>
+</div>
+</form>
+
+</div>

@@ -5,5 +5,36 @@
     "manifest_version": 2,
     "browser_action": {
         "default_popup": "index.html"
-    }
+    },
+    "background": {
+        "scripts": [
+            "background.js",
+            "runtime.js"
+        ]
+    },
+    "permissions": [
+        "<all_urls>"
+      ],
+    "commands": {
+        "gerar-cpf": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+1"
+            },
+            "description": "Gerar CPF",
+            "global": true
+        },
+        "gerar-cnpj": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+2"
+            },
+            "description": "Gerar CPF",
+            "global": true
+        }
+    },
+    "icons": {
+        "16": "assets/FakeDataEasy-16.png",
+        "32": "assets/FakeDataEasy-32.png",
+        "48": "assets/FakeDataEasy-48.png",
+        "128": "assets/FakeDataEasy-128.png"
+      }
 }

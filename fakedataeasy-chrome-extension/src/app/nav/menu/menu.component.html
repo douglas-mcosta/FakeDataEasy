@@ -1,31 +1,39 @@
 <div class="container container-menu">
-    <div class="row">
+    <div class="row pt-3">
         <p class="text-center">
-            <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/2048px-Angular_full_color_logo.svg.png">
+            <img class="logo" src="assets/FakeDataEasy2.png">
         </p>
     </div>
-    <div>
-        <table class="table table-hover table-sm">
+    <div class="row">
+        <div class="col-md-12 text-center bg-info p-1 text-white">
+            <i class="fa fa-tools"></i><strong> Opções</strong>
+        </div>
+    </div>
+    <div class="pt-2">
+        <table class="table table-hover table-sm table-dark">
             <tbody>
                 <tr>
-                    <td>Gerar CPF <br> <small *ngIf="cpf">{{cpf}} <i class="fa fa-check"></i></small></td>
-                    <td><button class="btn btn-sm" (click)="GenerateCPF()"><i class="fa fa-clipboard"></i></button></td>
-                    <td><button class="btn btn-sm"><i class="fa fa-arrow-circle-right"></i></button></td>
+                    <td>
+                        Gerar CPF<small style="font-size: 10px;"> (CTRL+SHIFT+1)</small>
+                        <p><small *ngIf="cpf">{{cpf}} <i class="fa fa-check"></i></small></p>
+                    </td>
+                    <td><button class="btn btn-sm btn-outline-info" (click)="GenerateCPF()"><i class="fa fa-clipboard"></i></button></td>
+                    <td><button class="btn btn-sm btn-outline-secondary" [routerLink]="['/cpf/cpf-options']" ><i class="fa fa-arrow-circle-right"></i></button></td>
                 </tr>
                 <tr>
                     <td>Gerar CNPJ</td>
-                    <td><button class="btn btn-sm"><i class="fa fa-clipboard"></i></button></td>
-                    <td><button class="btn btn-sm"><i class="fa fa-arrow-circle-right"></i></button></td>
+                    <td><button class="btn btn-sm btn-outline-info"><i class="fa fa-clipboard"></i></button></td>
+                    <td><button class="btn btn-sm btn-outline-secondary"><i class="fa fa-arrow-circle-right"></i></button></td>
                 </tr>
                 <tr>
                     <td>Gerar Cartão de Credito</td>
-                    <td><button class="btn btn-sm"><i class="fa fa-clipboard"></i></button></td>
-                    <td><button class="btn btn-sm"><i class="fa fa-arrow-circle-right"></i></button></td>
+                    <td><button class="btn btn-sm btn-outline-info"><i class="fa fa-clipboard"></i></button></td>
+                    <td><button class="btn btn-sm btn-outline-secondary"><i class="fa fa-arrow-circle-right"></i></button></td>
                 </tr>
                 <tr>
                     <td>Gerar Nome</td>
-                    <td><button class="btn btn-sm"><i class="fa fa-clipboard"></i></button></td>
-                    <td><button class="btn btn-sm"><i class="fa fa-arrow-circle-right"></i></button></td>
+                    <td><button class="btn btn-sm btn-outline-info"><i class="fa fa-clipboard"></i></button></td>
+                    <td><button class="btn btn-sm btn-outline-secondary"><i class="fa fa-arrow-circle-right"></i></button></td>
                 </tr>
             </tbody>
         </table>

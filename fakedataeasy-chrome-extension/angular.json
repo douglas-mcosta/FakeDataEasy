@@ -15,11 +15,12 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "customWebpackConfig": {
               "path": "./custom-webpack.config.js"
             },
+            "aot": true,
             "outputPath": "dist/fakedataeasy-chrome-extension",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -29,6 +30,7 @@
               "src/favicon.ico",
               "src/assets",
               "src/manifest.json"
+              
             ],
             "styles": [
               "src/styles.css"
@@ -55,7 +57,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "none"
             },
             "development": {
               "buildOptimizer": false,
