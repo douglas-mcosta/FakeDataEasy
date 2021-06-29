@@ -17,6 +17,7 @@ export class MenuComponent implements OnInit {
 
   GenerateCPF() {
     let cpf = CPF.GenerateCPFWithPoints();
+    CPF.CopyToClipboard(cpf);
 
     this.cpf = cpf;
 

@@ -14,7 +14,7 @@ export class CpfOptionsComponent implements OnInit {
 
     this.cpfForm = fb.group({
       cpf: ['', []],
-      cpfType: ['1',[]],
+      cpfType: ['1', []],
     });
   }
 
@@ -24,17 +24,18 @@ export class CpfOptionsComponent implements OnInit {
   GerarCPF() {
     let cpf = "";
 
-    if (this.cpfForm.controls.cpfType.value === "1") 
+    if (this.cpfForm.controls.cpfType.value === "1")
       cpf = CPF.GenerateCPFWithPoints();
-     else
+    else
       cpf = CPF.GenerateCPFWithoutPoints();
 
+    CPF.CopyToClipboard(cpf);
     this.cpfForm.controls['cpf'].setValue(cpf);
   }
 
-  ValidateCPF(){
+  ValidateCPF() {
     let cpf = this.cpfForm.controls.cpf.value;
-    let isValid =  CPF.Validate(cpf);
+    let isValid = CPF.Validate(cpf);
     //TODO: Terminar a validação do CPF
   }
 }
