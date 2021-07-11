@@ -17,26 +17,48 @@
                         Gerar CPF<small style="font-size: 10px;"> (CTRL+SHIFT+1)</small>
                         <p><small *ngIf="cpf">{{cpf}} <i class="fa fa-check"></i></small></p>
                     </td>
-                    <td><button class="btn btn-sm btn-outline-info" (click)="GenerateCPF()"><i class="fa fa-clipboard"></i></button></td>
-                    <td><button class="btn btn-sm btn-outline-secondary" [routerLink]="['/cpf/cpf-options']" ><i class="fa fa-arrow-circle-right"></i></button></td>
+                    <td><button class="btn btn-sm btn-outline-info" (click)="GenerateCPF()"><i
+                                class="fa fa-clipboard"></i></button></td>
+                    <td><button class="btn btn-sm btn-outline-secondary" [routerLink]="['/cpf/cpf-options']"><i
+                                class="fa fa-arrow-circle-right"></i></button></td>
                 </tr>
                 <tr>
-                    <td>Gerar CNPJ</td>
-                    <td><button class="btn btn-sm btn-outline-info"><i class="fa fa-clipboard"></i></button></td>
-                    <td><button class="btn btn-sm btn-outline-secondary"><i class="fa fa-arrow-circle-right"></i></button></td>
+                    <td>Gerar CNPJ<small style="font-size: 10px;"> (CTRL+SHIFT+2)</small>
+                        <p><small *ngIf="cnpj">{{cnpj}} <i class="fa fa-check"></i></small></p>
+                    </td>
+                    <td><button class="btn btn-sm btn-outline-info" (click)="GenerateCNPJ()"><i
+                                class="fa fa-clipboard"></i></button></td>
+                    <td><button class="btn btn-sm btn-outline-secondary" [routerLink]="['/cnpj/cnpj-options']"><i
+                                class="fa fa-arrow-circle-right"></i></button></td>
                 </tr>
+
                 <tr>
-                    <td>Gerar Cartão de Credito</td>
-                    <td><button class="btn btn-sm btn-outline-info"><i class="fa fa-clipboard"></i></button></td>
-                    <td><button class="btn btn-sm btn-outline-secondary"><i class="fa fa-arrow-circle-right"></i></button></td>
+                    <td>Gerar Nome<small style="font-size: 10px;"> (CTRL+SHIFT+3)</small>
+                        <p><small *ngIf="nome">{{nome}} <i class="fa fa-check"></i></small></p>
+                    </td>
+                    <td><button class="btn btn-sm btn-outline-info" (click)="GerarNome()"><i
+                                class="fa fa-clipboard"></i></button></td>
+                    <td><button class="btn btn-sm btn-outline-secondary" [routerLink]="['/nome/nome-options']"><i
+                                class="fa fa-arrow-circle-right"></i></button></td>
                 </tr>
+
                 <tr>
-                    <td>Gerar Nome</td>
-                    <td><button class="btn btn-sm btn-outline-info"><i class="fa fa-clipboard"></i></button></td>
-                    <td><button class="btn btn-sm btn-outline-secondary"><i class="fa fa-arrow-circle-right"></i></button></td>
+                    <td>Gerar Guid<small style="font-size: 10px;"> (CTRL+SHIFT+4)</small>
+                        <p><small *ngIf="guid">{{guid}} <i class="fa fa-check"></i></small></p>
+                    </td>
+                    <td><button class="btn btn-sm btn-outline-info" (click)="GerarGuid()"><i
+                                class="fa fa-clipboard"></i></button></td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>
     </div>
 
+    <footer class="border-top footer text-muted text-center">
+        <small>Desenvolvido por Douglas M. Costa</small>
+        <p>
+            <a href="https://www.linkedin.com/in/douglas-mcosta" target="_blank"><i class="fab fa-linkedin"></i></a> |
+            <a href="https://github.com/douglas-mcosta" target="_blank"><i class="fab fa-github"></i></a>
+        </p>
+    </footer>
 </div>

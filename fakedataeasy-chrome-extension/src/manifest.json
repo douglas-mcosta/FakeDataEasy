@@ -1,7 +1,7 @@
 {
     "name": "Fake Data Easy",
     "version": "1.0",
-    "description": "Gerar texto para validação de formulários",
+    "description": "Gerar dados fake para preenchimento e validação de formulários",
     "manifest_version": 2,
     "browser_action": {
         "default_popup": "index.html"
@@ -12,9 +12,7 @@
             "runtime.js"
         ]
     },
-    "permissions": [
-        "<all_urls>"
-      ],
+
     "commands": {
         "gerar-cpf": {
             "suggested_key": {
@@ -27,7 +25,21 @@
             "suggested_key": {
                 "default": "Ctrl+Shift+2"
             },
-            "description": "Gerar CPF",
+            "description": "Gerar CNPJ",
+            "global": true
+        },
+        "gerar-nome": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+3"
+            },
+            "description": "Gerar Nome",
+            "global": true
+        },
+        "gerar-guid": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+4"
+            },
+            "description": "Gerar Guid",
             "global": true
         }
     },

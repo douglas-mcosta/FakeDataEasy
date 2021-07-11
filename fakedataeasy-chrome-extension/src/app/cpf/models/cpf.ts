@@ -1,15 +1,13 @@
-import { generate } from "rxjs";
 import { CpfPipe } from "src/app/pipes/cpf.pipe";
+import { validateBr } from 'js-brasil';
+import { StringUtils } from "src/app/utils/string-utils";
 
 export class CPF {
 
     public CPF: string = '';
-    ValidateCPF(Cpf: string): boolean {
+    public static CPFMaskWithoutMask: Array<string | RegExp> =  [/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/];
 
-        return true;
-    }
-
-    private static GenerateCPF(): string {
+    private static GerarCPF(): string {
         const num1 = this.Random();
         const num2 = this.Random();
         const num3 = this.Random();
@@ -22,15 +20,15 @@ export class CPF {
         return cpf;
     }
 
-    static GenerateCPFWithPoints(): string {
+    static GerarCPFComPontos(): string {
       
        let cpfPipe = new CpfPipe();
-        let cpf = this.GenerateCPF();
+        let cpf = this.GerarCPF();
         return cpfPipe.transform(cpf);
     }
 
-    static GenerateCPFWithoutPoints(): string {
-         return this.GenerateCPF();
+    static GerarCPFSemPontos(): string {
+         return this.GerarCPF();
      }
 
     private static Digit(n1: any, n2: any, n3: any, n4: any) {
@@ -53,21 +51,14 @@ export class CPF {
         const random = Math.floor(Math.random() * 999);
         return ("" + random).padStart(3, '0');
     }
-
-    static CopyToClipboard(cpf: string): void{
-
-        var tempInput = document.createElement("input");
-        tempInput.value = cpf;
-        document.body.appendChild(tempInput);
-        tempInput.select();
-        document.execCommand("copy");
-        document.body.removeChild(tempInput);
-
-    }
-
-    static Validate(cpf:string): boolean{
-        //TODO: Validar CPF
-        return true;
+ 
+    static Validar(cpf:string): boolean{
+        
+        if(!cpf)
+        return false;
+        
+        cpf = StringUtils.onlyNumbers(cpf);
+        return validateBr.cpf(cpf);
     }
 }
 

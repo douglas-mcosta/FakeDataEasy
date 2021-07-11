@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { CpfOptionsComponent } from './cpf-options/cpf-options.component';
 import { CPFRoutingModule } from './cpf.routes';
 import { CPFAppComponent } from './cpf.app.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgBrazil } from 'ng-brazil';
+import { TextMaskModule } from 'angular2-text-mask';
 
 
 
@@ -14,8 +16,11 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     CPFRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TextMaskModule,
+    NgBrazil
   ]
 })
 export class CpfModule { }

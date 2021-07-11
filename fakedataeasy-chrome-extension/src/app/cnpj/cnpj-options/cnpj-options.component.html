@@ -5,14 +5,14 @@
         </p>
     </div>
 
-    <form (ngSubmit)="ValidarCPF()" [formGroup]="cpfForm">
+    <form [formGroup]="cnpjForm">
 
     <div class="row pt-3">
         <div class="col-md-12">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" [ngClass]="cpfForm.controls.cpf.valid && cpfForm.controls.cpf.value ? 'is-valid':'is-invalid'" placeholder="CPF" formControlName="cpf" cpf [textMask]="cpfTypeForm() === '1' ? { mask: MASKS.cpf.textMask } : { mask: cpfMaskWithoutMask }">
+                <input type="text" class="form-control" [ngClass]="cnpjForm.controls.cnpj.valid && cnpjForm.controls.cnpj.value ? 'is-valid':'is-invalid'" placeholder="CNPJ" formControlName="cnpj" CNPJ [textMask]="cnpjTypeForm() === '1' ? { mask: MASKS.cnpj.textMask } : { mask: cnpjMaskWithoutMask }"> 
                 <div class="input-group-append">
-                    <button class="btn btn-outline-info" type="button" (click)="GerarCPF()"><i class="fas fa-undo"></i> Gerar</button>
+                    <button class="btn btn-outline-info" type="button" (click)="GerarCNPJ()"><i class="fas fa-undo"></i> Gerar</button>
                 </div>
               </div>
         </div>
@@ -22,11 +22,11 @@
         <div class="col-md-12">
             <div class="col-md-12 text-white pt-2 text-center">
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="cpfType" id="cpfType" value="1" formControlName="cpfType">
+                    <input class="form-check-input" type="radio" name="cnpjType" id="cnpjType" value="1" formControlName="cnpjType">
                     <label class="form-check-label">Com Pontos</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="cpfType" id="cpfType" value="0" formControlName="cpfType">
+                    <input class="form-check-input" type="radio" name="cnpjType" id="cnpjType" value="0" formControlName="cnpjType">
                     <label class="form-check-label">Sem Pontos</label>
                 </div>
             </div>

@@ -8,7 +8,17 @@ const routes: Routes = [
   {
     path: 'cpf',
     loadChildren: () => import('./cpf/cpf.module')
-      .then(m => m.CpfModule)
+      .then(m => m.CpfModule),
+  },
+  {
+    path: 'cnpj',
+    loadChildren: () => import('./cnpj/cnpj.module')
+      .then(m => m.CnpjModule),
+  },
+  {
+    path: 'nome',
+    loadChildren: () => import('./nome/nome.module')
+      .then(m => m.NomeModule),
   }
 ];
 

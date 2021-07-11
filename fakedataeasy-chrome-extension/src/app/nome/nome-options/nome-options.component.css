@@ -1,0 +1,12 @@
+.container{
+    width: 300px !important;
+    max-width: 300px !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.logo{
+    width: 220px;
+    max-width: 220px;
+    align-items: center;
+}

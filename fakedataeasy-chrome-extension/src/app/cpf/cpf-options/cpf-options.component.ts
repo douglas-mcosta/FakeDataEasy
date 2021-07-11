@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MASKS, NgBrazilValidators } from 'ng-brazil';
+import { StringUtils } from 'src/app/utils/string-utils';
 import { CPF } from '../models/cpf';
 
 @Component({
@@ -10,11 +12,14 @@ import { CPF } from '../models/cpf';
 export class CpfOptionsComponent implements OnInit {
 
   public cpfForm: FormGroup;
+  public MASKS = MASKS;
+  public cpfMaskWithoutMask: Array<string | RegExp>
+  public CpfIsValid = false;
   constructor(private fb: FormBuilder) {
-
+    this.cpfMaskWithoutMask = CPF.CPFMaskWithoutMask;
     this.cpfForm = fb.group({
-      cpf: ['', []],
-      cpfType: ['1', []],
+      cpf: ['', [NgBrazilValidators.cpf]],
+      cpfType: ['0', []],
     });
   }
 
@@ -22,20 +27,19 @@ export class CpfOptionsComponent implements OnInit {
   }
 
   GerarCPF() {
-    let cpf = "";
 
-    if (this.cpfForm.controls.cpfType.value === "1")
-      cpf = CPF.GenerateCPFWithPoints();
-    else
-      cpf = CPF.GenerateCPFWithoutPoints();
+    let cpf = CPF.GerarCPFSemPontos();
 
-    CPF.CopyToClipboard(cpf);
+    StringUtils.CopyToClipboard(cpf);
     this.cpfForm.controls['cpf'].setValue(cpf);
   }
 
-  ValidateCPF() {
+  ValidarCPF() {
     let cpf = this.cpfForm.controls.cpf.value;
-    let isValid = CPF.Validate(cpf);
-    //TODO: Terminar a validação do CPF
+    this.CpfIsValid = CPF.Validar(cpf);
+  }
+
+  cpfTypeForm() {
+    return this.cpfForm.controls.cpfType.value;
   }
 }
