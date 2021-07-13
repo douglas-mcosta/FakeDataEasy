@@ -44,9 +44,15 @@ Quando executado o build do projeto é criado a pasta "Dist" com o código trans
 ![image](https://user-images.githubusercontent.com/12072278/125504497-9bb904b7-d103-4514-8734-e2c57b804461.png)
 
 - Estamos organizando o projeto por modulo/feature conforme a imagem abaixo
+
 ![image](https://user-images.githubusercontent.com/12072278/125511368-cdfc0b18-520c-4bcb-b39f-31002508fe96.png)
 
 
+## Extensão na Chrome Web Store
 
+https://chrome.google.com/webstore/detail/fake-data-easy/nkdncmpmmhpdngfjbghlebjfncemheij?hl=pt-BR
 
+## Material de Apoio
+
+https://medium.com/angular-in-depth/chrome-extension-with-angular-why-and-how-778200b87575
 
