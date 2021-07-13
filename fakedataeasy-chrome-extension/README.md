@@ -32,12 +32,15 @@ Quando executado o build do projeto é criado a pasta "Dist" com o código trans
 ### Adicionar um atalho
 
 - No arquivo manifest.json registre seu atalho 
+
 ![image](https://user-images.githubusercontent.com/12072278/125504032-320c2b4d-e1ab-4793-92fa-67ad610bc9b7.png)
 - Em models > commandType-enum.ts registre seu atalho com o mesmo nome utilizado no manifest.js. Esse enum é utilzado para facilitar a leitura e utilização dos atalhos no código
+
 ![image](https://user-images.githubusercontent.com/12072278/125504266-6ec4ad53-6546-467e-b7ca-ff13ba741d66.png)
 
 - Quando é executado um atalho 
-- ![image](https://user-images.githubusercontent.com/12072278/125504497-9bb904b7-d103-4514-8734-e2c57b804461.png)
+
+![image](https://user-images.githubusercontent.com/12072278/125504497-9bb904b7-d103-4514-8734-e2c57b804461.png)
 
 
 
