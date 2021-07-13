@@ -13,9 +13,9 @@ A maneira mais rápida e prática de gerar um dado válido através da extensão
 Lista de atalhos disponiveis no momento:
 
 - CTRL + SHIFT + 1 - Gera um CPF
-- CTRL + SHIFT + 1 - Gera um CNPJ
-- CTRL + SHIFT + 1 - Gera um Nome 
-- CTRL + SHIFT + 1 - Gera um Guid
+- CTRL + SHIFT + 2 - Gera um CNPJ
+- CTRL + SHIFT + 3 - Gera um Nome 
+- CTRL + SHIFT + 4 - Gera um Guid
 
 ## Desenvolvedores
 O projeto está escrito em Angular utilizando o typescript.
