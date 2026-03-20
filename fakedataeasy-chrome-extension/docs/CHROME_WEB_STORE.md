@@ -4,6 +4,8 @@ Checklist e textos auxiliares para submeter **Fake Data Easy** (Manifest V3), al
 
 ## 1. Antes de carregar o pacote
 
+O campo **`description`** do `manifest.json` tem limite de **132 caracteres** na Chrome Web Store; textos mais longos falham no upload.
+
 1. `npm ci`
 2. `npm run build` — pasta `dist/` com `manifest.json` na raiz.
 3. Teste **Carregar sem compactação** em `chrome://extensions` apontando para `dist/`.

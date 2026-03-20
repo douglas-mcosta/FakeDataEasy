@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Fake Data Easy",
   "version": "2.3.0",
-  "description": "Gera dados fictícios localmente (CPF, CNPJ, CEP, nome, GUID) para testar formulários. Atalhos Ctrl+Shift+1–4. Helper opcional só em sites que você autorizar; pode desligar nas opções. Sem anúncios, sem telemetria, sem envio de dados para a rede.",
+  "description": "Gera CPF, CNPJ, CEP, nome e GUID fictícios para testes. Atalhos globais; helper em sites permitidos. Local, sem telemetria.",
   "minimum_chrome_version": "109",
   "action": {
     "default_popup": "popup/index.html",
