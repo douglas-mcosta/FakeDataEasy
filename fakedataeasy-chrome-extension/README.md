@@ -86,10 +86,20 @@ public/         — manifest + ícones SVG/PNG (copiados para dist/)
 - Guia completo: [`docs/CHROME_WEB_STORE.md`](docs/CHROME_WEB_STORE.md) — checklist, **Data safety**, justificativas **activeTab / scripting / storage**, texto para revisor, URLs `raw.githubusercontent.com` vs página no GitHub.
 - Política de privacidade: [`PRIVACY.md`](PRIVACY.md) (o painel da loja deve usar o **mesmo** URL HTTPS que declarar; o popup/opções ligam à vista no GitHub).
 
-Gerar o **ZIP** de submissão (faz build e cria `fake-data-easy-chrome-<versão>.zip` na raiz desta pasta):
+Gerar o **ZIP** de submissão (faz build e cria o ficheiro **dentro de** `dist/`):
 
 ```bash
 npm run zip
 ```
+
+→ `dist/fake-data-easy-chrome-<versão>.zip` (ficheiros `*.zip` antigos em `dist/` não entram no arquivo).
+
+Com **nome personalizado**:
+
+```bash
+node scripts/zip-dist.mjs fake_data_easy_v2.0
+```
+
+→ `dist/fake_data_easy_v2.0.zip`.
 
 O ZIP contém o **interior** de `dist/` na raiz (com `manifest.json` no topo), como a loja exige.

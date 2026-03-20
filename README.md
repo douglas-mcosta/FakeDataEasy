@@ -47,7 +47,7 @@ Carrega no Chrome a pasta **`fakedataeasy-chrome-extension/dist`** em modo progr
 | Comando | Efeito |
 |---------|--------|
 | `npm run dev` | Build em modo *watch* (recompila ao gravar; recarrega a extensão manualmente). |
-| `npm run zip` | Build + arquivo `fake-data-easy-chrome-<versão>.zip` pronto para a loja (conteúdo = interior de `dist/`). |
+| `npm run zip` | Build + arquivo `dist/fake-data-easy-chrome-<versão>.zip` pronto para a loja (conteúdo = interior de `dist/`). |
 
 **Stack:** Vite 6 · TypeScript · MV3 (service worker, *offscreen* para clipboard nos atalhos) · *content script* com Shadow DOM no helper.
 

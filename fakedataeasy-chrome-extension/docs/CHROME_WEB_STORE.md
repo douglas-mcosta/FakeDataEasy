@@ -7,7 +7,7 @@ Checklist e textos auxiliares para submeter **Fake Data Easy** (Manifest V3), al
 1. `npm ci`
 2. `npm run build` — pasta `dist/` com `manifest.json` na raiz.
 3. Teste **Carregar sem compactação** em `chrome://extensions` apontando para `dist/`.
-4. (Opcional) `npm run zip` — gera `fake-data-easy-chrome-<versão>.zip` na raiz do projecto da extensão (conteúdo = interior de `dist/`, sem pasta extra).
+4. (Opcional) `npm run zip` — gera `dist/fake-data-easy-chrome-<versão>.zip` (conteúdo = interior de `dist/` **sem** incluir outros `.zip`; estrutura do arquivo igual à pasta `dist/`, sem pasta extra).
 
 ## 2. Testes manuais
 
@@ -120,7 +120,7 @@ Sugestão curta **PT:**
 - O ZIP deve ter **`manifest.json` na raiz**, como o interior de `dist/` após `npm run build`.
 - **Não** empacotar `src/`, `node_modules/`, nem uma pasta única `dist/` por cima de tudo.
 
-O script `npm run zip` gera a estrutura correcta.
+O script `npm run zip` gera a estrutura correcta; o ficheiro `.zip` fica em **`dist/`** (não na raiz do repo).
 
 ## 10. Documentação oficial
 

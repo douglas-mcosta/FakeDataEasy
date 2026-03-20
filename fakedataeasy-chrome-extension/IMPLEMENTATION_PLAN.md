@@ -175,7 +175,7 @@ fakedataeasy-chrome-extension/
 - Lista de verificação da Chrome Web Store: política de privacidade, capturas de ecrã, justificação de permissões.
 - Empacotar `.zip` só com `dist/`.
 
-**Implementação:** [`docs/CHROME_WEB_STORE.md`](./docs/CHROME_WEB_STORE.md) (checklist, testes manuais, textos PT/EN para permissões e finalidade única); [`PRIVACY.md`](./PRIVACY.md) (política para URL pública); script **`npm run zip`** ([`scripts/zip-dist.mjs`](./scripts/zip-dist.mjs)) gera `fake-data-easy-chrome-<versão>.zip` com o conteúdo de `dist/` na raiz do arquivo.
+**Implementação:** [`docs/CHROME_WEB_STORE.md`](./docs/CHROME_WEB_STORE.md) (checklist, testes manuais, textos PT/EN para permissões e finalidade única); [`PRIVACY.md`](./PRIVACY.md) (política para URL pública); script **`npm run zip`** ([`scripts/zip-dist.mjs`](./scripts/zip-dist.mjs)) grava `fake-data-easy-chrome-<versão>.zip` em **`dist/`**, com o conteúdo de `dist/` na raiz do ZIP (exclui outros `.zip`).
 
 ---
 
