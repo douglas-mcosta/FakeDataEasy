@@ -1,8 +1,10 @@
+@import './theme.css';
+
 :root {
   font-family: system-ui, Segoe UI, Roboto, sans-serif;
   font-size: 14px;
-  color: #e8eaed;
-  background: #202124;
+  color: var(--fde-text);
+  background: var(--fde-bg);
 }
 
 * {
@@ -31,15 +33,94 @@ body {
   vertical-align: middle;
 }
 
+.site-panel {
+  background: var(--fde-surface);
+  border: 1px solid var(--fde-border);
+  border-radius: 6px;
+  padding: 10px 10px 12px;
+  margin-bottom: 10px;
+}
+
+.site-label {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: var(--fde-text-muted);
+  word-break: break-all;
+}
+
+.site-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.btn-site {
+  flex: 1;
+  min-width: 120px;
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  border: 1px solid var(--fde-accent);
+  background: var(--fde-accent-soft);
+  color: var(--fde-accent-label);
+  cursor: pointer;
+}
+
+.btn-site:hover {
+  background: var(--fde-accent-soft-hover);
+}
+
+.btn-site:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-site--ghost {
+  border-color: var(--fde-border-muted);
+  background: transparent;
+  color: var(--fde-text);
+}
+
+.btn-site--ghost:hover {
+  background: var(--fde-btn-ghost-hover);
+}
+
+.site-hint {
+  margin: 8px 0 0;
+  font-size: 11px;
+  color: var(--fde-success);
+}
+
+.site-hint.err {
+  color: var(--fde-error);
+}
+
 .section-title {
-  background: #1a73e8;
-  color: #fff;
+  background: var(--fde-accent);
+  color: var(--fde-section-fg);
   text-align: center;
   font-weight: 600;
   padding: 6px 8px;
   border-radius: 4px;
   margin-bottom: 8px;
   font-size: 13px;
+}
+
+button.section-title {
+  display: block;
+  width: 100%;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+button.section-title:hover {
+  filter: brightness(1.06);
+}
+
+button.section-title:focus-visible {
+  outline: 2px solid var(--fde-section-fg);
+  outline-offset: 2px;
 }
 
 .section-icon {
@@ -50,13 +131,13 @@ body {
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
-  background: #2d2d30;
+  background: var(--fde-surface);
   border-radius: 4px;
   overflow: hidden;
 }
 
 .menu-table tr {
-  border-bottom: 1px solid #3c4043;
+  border-bottom: 1px solid var(--fde-border);
 }
 
 .menu-table tr:last-child {
@@ -75,13 +156,13 @@ body {
 .cell-label small.shortcut {
   display: block;
   font-size: 10px;
-  color: #9aa0a6;
+  color: var(--fde-text-muted);
   margin-top: 2px;
 }
 
 .preview {
   font-size: 11px;
-  color: #81c995;
+  color: var(--fde-success);
   margin-top: 4px;
   word-break: break-all;
   max-width: 220px;
@@ -103,29 +184,29 @@ body {
   min-width: 32px;
   min-height: 28px;
   padding: 2px 8px;
-  border: 1px solid #5f6368;
+  border: 1px solid var(--fde-border-muted);
   border-radius: 4px;
   background: transparent;
-  color: #e8eaed;
+  color: var(--fde-text);
   cursor: pointer;
   font-size: 14px;
   text-decoration: none;
 }
 
 .btn-icon:hover {
-  background: #3c4043;
+  background: var(--fde-btn-ghost-hover);
 }
 
 .btn-link {
-  color: #8ab4f8;
+  color: var(--fde-link);
 }
 
 .footer {
   margin-top: 14px;
   padding-top: 10px;
-  border-top: 1px solid #3c4043;
+  border-top: 1px solid var(--fde-border);
   text-align: center;
-  color: #9aa0a6;
+  color: var(--fde-text-muted);
   font-size: 11px;
 }
 
@@ -134,7 +215,7 @@ body {
 }
 
 .footer-links a {
-  color: #8ab4f8;
+  color: var(--fde-link);
   text-decoration: none;
 }
 
@@ -144,7 +225,7 @@ body {
 
 .sep {
   margin: 0 6px;
-  color: #5f6368;
+  color: var(--fde-sep);
 }
 
 /* ——— Páginas de opções (CPF / CNPJ / Nome) ——— */
@@ -168,39 +249,39 @@ body {
   flex: 1;
   min-width: 0;
   padding: 8px 10px;
-  border: 1px solid #5f6368;
+  border: 1px solid var(--fde-border-muted);
   border-radius: 4px;
-  background: #303134;
-  color: #e8eaed;
+  background: var(--fde-surface-input);
+  color: var(--fde-text);
   font-size: 14px;
 }
 
 .field-row input[type='text']:focus {
-  outline: 2px solid #1a73e8;
+  outline: 2px solid var(--fde-accent);
   outline-offset: 0;
 }
 
 .field-row input.valid {
-  border-color: #81c995;
+  border-color: var(--fde-success);
 }
 
 .field-row input.invalid {
-  border-color: #f28b82;
+  border-color: var(--fde-error);
 }
 
 .btn-gerar {
   padding: 8px 12px;
-  border: 1px solid #1a73e8;
+  border: 1px solid var(--fde-accent);
   border-radius: 4px;
-  background: rgba(26, 115, 232, 0.2);
-  color: #8ab4f8;
+  background: var(--fde-accent-soft);
+  color: var(--fde-accent-label);
   cursor: pointer;
   font-size: 13px;
   white-space: nowrap;
 }
 
 .btn-gerar:hover {
-  background: rgba(26, 115, 232, 0.35);
+  background: var(--fde-accent-soft-hover);
 }
 
 .radio-row {
@@ -227,13 +308,13 @@ body {
 }
 
 .valid-msg.ok {
-  background: rgba(129, 201, 149, 0.15);
-  color: #81c995;
+  background: var(--fde-success-bg);
+  color: var(--fde-success);
 }
 
 .valid-msg.bad {
-  background: rgba(242, 139, 130, 0.15);
-  color: #f28b82;
+  background: var(--fde-error-bg);
+  color: var(--fde-error);
 }
 
 .page-actions {
@@ -251,23 +332,23 @@ body {
   justify-content: center;
   width: 36px;
   height: 32px;
-  border: 1px solid #5f6368;
+  border: 1px solid var(--fde-border-muted);
   border-radius: 4px;
-  color: #e8eaed;
+  color: var(--fde-text);
   text-decoration: none;
   font-size: 16px;
 }
 
 .btn-back:hover {
-  background: #3c4043;
+  background: var(--fde-btn-ghost-hover);
 }
 
 .btn-soon {
   padding: 6px 10px;
-  border: 1px solid #5f6368;
+  border: 1px solid var(--fde-border-muted);
   border-radius: 4px;
-  background: #3c4043;
-  color: #9aa0a6;
+  background: var(--fde-btn-ghost-hover);
+  color: var(--fde-text-muted);
   font-size: 12px;
   cursor: not-allowed;
 }
@@ -276,14 +357,14 @@ body {
   width: 100%;
   margin-top: 4px;
   padding: 8px;
-  border: 1px solid #5f6368;
+  border: 1px solid var(--fde-border-muted);
   border-radius: 4px;
-  background: #303134;
-  color: #e8eaed;
+  background: var(--fde-surface-input);
+  color: var(--fde-text);
   cursor: pointer;
   font-size: 13px;
 }
 
 .btn-validar:hover {
-  background: #3c4043;
+  background: var(--fde-btn-ghost-hover);
 }

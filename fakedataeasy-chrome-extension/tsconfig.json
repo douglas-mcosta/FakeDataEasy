@@ -15,6 +15,7 @@
     "src/**/*.ts",
     "popup/**/*.ts",
     "pages/**/*.ts",
+    "options/**/*.ts",
     "offscreen/**/*.ts",
     "vite.config.ts"
   ]

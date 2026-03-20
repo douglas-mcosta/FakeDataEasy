@@ -1,12 +1,12 @@
 {
   "name": "fakedataeasy-chrome-extension",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "private": true,
   "type": "module",
   "description": "Extensão Chrome — dados fictícios para testes (MV3, sem Angular)",
   "scripts": {
-    "build": "vite build",
-    "dev": "vite build --watch",
+    "build": "vite build && vite build --config vite.field-helper.config.ts",
+    "dev": "concurrently -k \"vite build --watch\" \"vite build --config vite.field-helper.config.ts --watch\"",
     "zip": "npm run build && node scripts/zip-dist.mjs"
   },
   "dependencies": {
@@ -17,6 +17,7 @@
     "@types/chrome": "^0.0.287",
     "@types/node": "^22.10.2",
     "archiver": "^7.0.1",
+    "concurrently": "^9.1.2",
     "typescript": "~5.7.2",
     "vite": "^6.0.6"
   }

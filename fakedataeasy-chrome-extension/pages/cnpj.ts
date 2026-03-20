@@ -2,8 +2,11 @@ import { copyToClipboard } from '../src/lib/clipboard';
 import { CNPJ } from '../src/lib/cnpj';
 import { formatCnpjDigits } from '../src/lib/format-br';
 import { onlyNumbers } from '../src/lib/string-utils';
+import { initThemeOnPage } from '../src/lib/theme';
 
 document.documentElement.lang = 'pt-BR';
+
+void initThemeOnPage();
 
 const input = document.getElementById('cnpj-input') as HTMLInputElement;
 const btnGerar = document.getElementById('cnpj-gerar') as HTMLButtonElement;

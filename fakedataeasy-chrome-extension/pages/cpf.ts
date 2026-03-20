@@ -2,8 +2,11 @@ import { copyToClipboard } from '../src/lib/clipboard';
 import { CPF } from '../src/lib/cpf';
 import { formatCpfDigits } from '../src/lib/format-br';
 import { onlyNumbers } from '../src/lib/string-utils';
+import { initThemeOnPage } from '../src/lib/theme';
 
 document.documentElement.lang = 'pt-BR';
+
+void initThemeOnPage();
 
 const form = document.getElementById('cpf-form') as HTMLFormElement;
 const input = document.getElementById('cpf-input') as HTMLInputElement;

@@ -34,9 +34,17 @@ npm run dev
 - [`IMPLEMENTATION_PLAN.md`](./IMPLEMENTATION_PLAN.md) — fases da reescrita
 - [`docs/IDEIAS_E_MELHORIAS.md`](docs/IDEIAS_E_MELHORIAS.md) — ideias futuras (ícones no campo, auto vs manual, loja)
 
+## Helper nos campos (por site)
+
+- **Os atalhos globais (Ctrl+Shift+1–4) funcionam em qualquer sítio ou aplicação** onde o Chrome os aceite: **não** dependem da lista de sites. Copiam para a área de transferência sem injectar nada na página.
+- **A barra Auto / Escolher** junto aos campos só aparece nas **origens que estiverem na tua lista** (por defeito `localhost` e `127.0.0.1`). Isto limita o content script aos sites onde autorizaste a extensão.
+- Ao focar um `<input>` / `<textarea>` compatível: **Auto** (raio + texto; heurística “parece e-mail”, CPF, CNPJ, telefone BR, data ISO, URL, nome, GUID…) e **Escolher** (lista + texto; menu manual). Se o campo for ambíguo, aparece uma dica a amarelo a sugerir **Escolher**.
+- No **popup**: **Site actual** → **Adicionar este site** ou **Gerir lista…**; **⚙ Configurações** ou **Gerir lista** abrem a página de configurações **num novo separador** (sites + tema). As setas **→** levam ao ecrã do gerador **no próprio popup** (navegação interna).
+- **Tema**: em **Configurações** → **Aparência**, escolhe **Automático** (segue o sistema), **Claro** ou **Escuro**. Popup, configurações e páginas de geradores partilham a mesma preferência (`chrome.storage.local`).
+
 ## Atalhos globais
 
-Após instalar, **Ctrl+Shift+1–4** (no macOS, combinações sugeridas com **Command**) geram e **copiam** CPF, CNPJ, nome ou GUID, sem abrir o popup. Personalize em `chrome://extensions` → **Atalhos**.
+**Ctrl+Shift+1–4** (no macOS, **Command+Shift+…** conforme sugerido) geram e **copiam** CPF, CNPJ, nome ou GUID **em qualquer lado**, sem estar o URL na lista. Personalize em `chrome://extensions` → **Atalhos**.
 
 As regras oficiais do Chrome **não mudaram** em traços gerais: atalhos **globais** só podem ser sugeridos como **`Ctrl+Shift+0`–`9`** (medida de segurança). Ver [documentação `commands`](https://developer.chrome.com/docs/extensions/reference/api/commands).
 
@@ -48,8 +56,13 @@ As regras oficiais do Chrome **não mudaram** em traços gerais: atalhos **globa
 
 ## Permissões
 
+- **`activeTab`** — ler o URL do separador actual no popup para “Adicionar este site”.
+- **`scripting`** + **`storage`** — injectar o helper só nos hosts da tua lista; guardar a lista localmente.
+- **`host_permissions`** — `localhost` / `127.0.0.1` por defeito.
+- **`optional_host_permissions`** (`http://*/*`, `https://*/*`) — concedidas **quando adicionas** cada site (popup ou opções). Só esses hosts entram no registo do content script.
 - **`clipboardWrite`** — copiar valores gerados.
-- **`offscreen`** — documento invisível com motivo `CLIPBOARD` usado para escrever na área de transferência a partir dos **atalhos** (fluxo fiável em MV3).
+- **`offscreen`** — clipboard fiável a partir dos **atalhos** globais (MV3).
+- **`tabs`** — abrir a página de **configurações** num separador a partir do botão no popup (`chrome.tabs.create` para `options/options.html`).
 
 ## Estrutura
 

@@ -49,6 +49,22 @@ A loja exige uma **URL HTTPS** para a política de privacidade.
 **Português:**  
 “Utilizada apenas para um documento invisível com motivo `CLIPBOARD`, quando o Chrome não permite copiar diretamente a partir do service worker ao usar atalhos globais. Não exibe interface nem recolhe dados.”
 
+### tabs
+
+**Português:**  
+“Usada só para abrir o separador da página de configurações da extensão (lista de sites, tema) quando o utilizador clica em **Configurações** ou **Gerir lista** no popup. A extensão não lê o histórico nem o conteúdo dos sites do utilizador através desta permissão.”
+
+**English:**  
+“Used only to open a tab showing the extension’s settings page (site list, theme) when the user clicks **Settings** or **Manage list** in the popup. The extension does not read browsing history or page content through this permission.”
+
+### optional_host_permissions (http/https)
+
+**Português:**  
+“O utilizador escolhe em que sites a extensão pode injectar o helper nos campos. A permissão é pedida **por origem** (ao clicar em ‘Adicionar este site’ ou ao guardar a lista nas opções). Não é pedido acesso a todos os sites automaticamente.”
+
+**English:**  
+“Users choose which sites may run the optional in-page field helper. Host access is requested **per origin** when they add a site or save the list. The extension does not request blanket access to all websites without user action.”
+
 **English:**  
 “Used only for an invisible offscreen document with the `CLIPBOARD` reason when the browser cannot write to the clipboard directly from the service worker for global shortcuts. No UI is shown and no user data is collected.”
 

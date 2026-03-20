@@ -1,0 +1,49 @@
+/**
+ * Paleta por tema. O TS define `data-theme="light"` ou `data-theme="dark"` em <html>.
+ */
+:root,
+[data-theme='dark'] {
+  --fde-bg: #202124;
+  --fde-surface: #2d2d30;
+  --fde-surface-input: #303134;
+  --fde-border: #3c4043;
+  --fde-border-muted: #5f6368;
+  --fde-text: #e8eaed;
+  --fde-text-muted: #9aa0a6;
+  --fde-accent: #1a73e8;
+  --fde-accent-soft: rgba(26, 115, 232, 0.2);
+  --fde-accent-soft-hover: rgba(26, 115, 232, 0.35);
+  --fde-accent-label: #8ab4f8;
+  --fde-link: #8ab4f8;
+  --fde-success: #81c995;
+  --fde-success-bg: rgba(129, 201, 149, 0.15);
+  --fde-error: #f28b82;
+  --fde-error-bg: rgba(242, 139, 130, 0.15);
+  --fde-code-bg: #303134;
+  --fde-section-fg: #fff;
+  --fde-btn-ghost-hover: #3c4043;
+  --fde-sep: #5f6368;
+}
+
+[data-theme='light'] {
+  --fde-bg: #f1f3f4;
+  --fde-surface: #ffffff;
+  --fde-surface-input: #ffffff;
+  --fde-border: #dadce0;
+  --fde-border-muted: #bdc1c6;
+  --fde-text: #202124;
+  --fde-text-muted: #5f6368;
+  --fde-accent: #1967d2;
+  --fde-accent-soft: rgba(26, 115, 232, 0.12);
+  --fde-accent-soft-hover: rgba(26, 115, 232, 0.22);
+  --fde-accent-label: #1967d2;
+  --fde-link: #1967d2;
+  --fde-success: #137333;
+  --fde-success-bg: rgba(19, 115, 51, 0.12);
+  --fde-error: #c5221f;
+  --fde-error-bg: rgba(197, 34, 31, 0.1);
+  --fde-code-bg: #e8eaed;
+  --fde-section-fg: #fff;
+  --fde-btn-ghost-hover: #e8eaed;
+  --fde-sep: #dadce0;
+}

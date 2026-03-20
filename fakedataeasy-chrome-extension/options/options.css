@@ -1,0 +1,156 @@
+@import '../popup/theme.css';
+
+:root {
+  font-family: system-ui, Segoe UI, Roboto, sans-serif;
+  color: var(--fde-text);
+  background: var(--fde-bg);
+  line-height: 1.5;
+}
+
+body {
+  margin: 0;
+  padding: 20px 24px 40px;
+}
+
+.wrap {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 1.35rem;
+  margin: 0 0 8px;
+}
+
+h2 {
+  font-size: 1.05rem;
+  margin: 24px 0 8px;
+}
+
+.lead,
+.hint {
+  color: var(--fde-text-muted);
+  font-size: 14px;
+  margin: 0 0 12px;
+}
+
+code {
+  background: var(--fde-code-bg);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.site-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.site-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 10px;
+  background: var(--fde-surface);
+  border: 1px solid var(--fde-border);
+  border-radius: 6px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  word-break: break-all;
+}
+
+.site-list li .warn {
+  color: var(--fde-error);
+}
+
+.site-list button {
+  flex-shrink: 0;
+}
+
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid var(--fde-border-muted);
+  border-radius: 6px;
+  background: var(--fde-surface-input);
+  color: var(--fde-text);
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+button {
+  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  border: 1px solid var(--fde-border-muted);
+  background: var(--fde-btn-ghost-hover);
+  color: var(--fde-text);
+}
+
+button.primary {
+  background: var(--fde-accent-soft);
+  border-color: var(--fde-accent);
+  color: var(--fde-accent-label);
+}
+
+button.secondary {
+  background: transparent;
+}
+
+button:hover {
+  filter: brightness(1.06);
+}
+
+.status {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--fde-success);
+  min-height: 1.4em;
+}
+
+.status.err {
+  color: var(--fde-error);
+}
+
+.theme-fieldset {
+  border: 1px solid var(--fde-border);
+  border-radius: 8px;
+  padding: 12px 16px 16px;
+  margin: 0 0 24px;
+  background: var(--fde-surface);
+}
+
+.theme-fieldset legend {
+  padding: 0 8px;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.theme-options label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.theme-options input {
+  accent-color: var(--fde-accent);
+}
+
+.theme-hint {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--fde-text-muted);
+}

@@ -12,7 +12,19 @@
         <img class="logo" src="/assets/FakeDataEasy2.png" alt="Fake Data Easy" width="180" height="auto" />
       </div>
 
-      <div class="section-title"><span class="section-icon">⚙</span> Opções</div>
+      <div class="section-title"><span class="section-icon">🌐</span> Site actual</div>
+      <div class="site-panel">
+        <p id="current-site-label" class="site-label">—</p>
+        <div class="site-actions">
+          <button type="button" id="btn-add-current-site" class="btn-site">Adicionar este site</button>
+          <button type="button" id="btn-open-options" class="btn-site btn-site--ghost">Gerir lista…</button>
+        </div>
+        <p id="add-site-hint" class="site-hint" hidden></p>
+      </div>
+
+      <button type="button" class="section-title" id="btn-section-settings" aria-label="Abrir configurações (sites permitidos, tema)">
+        <span class="section-icon" aria-hidden="true">⚙</span> Configurações
+      </button>
 
       <table class="menu-table">
         <tbody>
@@ -25,7 +37,7 @@
               <button type="button" class="btn-icon btn-copy" title="Gerar e copiar" aria-label="Gerar e copiar CPF">📋</button>
             </td>
             <td class="cell-actions">
-              <a class="btn-icon btn-link" href="../pages/cpf.html" title="Opções" aria-label="Opções CPF">→</a>
+              <a class="btn-icon btn-link" href="../pages/cpf.html" title="Gerador e máscaras CPF" aria-label="Abrir ecrã do gerador CPF">→</a>
             </td>
           </tr>
           <tr data-kind="cnpj">
@@ -37,7 +49,7 @@
               <button type="button" class="btn-icon btn-copy" title="Gerar e copiar" aria-label="Gerar e copiar CNPJ">📋</button>
             </td>
             <td class="cell-actions">
-              <a class="btn-icon btn-link" href="../pages/cnpj.html" title="Opções" aria-label="Opções CNPJ">→</a>
+              <a class="btn-icon btn-link" href="../pages/cnpj.html" title="Gerador e máscaras CNPJ" aria-label="Abrir ecrã do gerador CNPJ">→</a>
             </td>
           </tr>
           <tr data-kind="nome">
@@ -49,7 +61,7 @@
               <button type="button" class="btn-icon btn-copy" title="Gerar e copiar" aria-label="Gerar e copiar nome">📋</button>
             </td>
             <td class="cell-actions">
-              <a class="btn-icon btn-link" href="../pages/nome.html" title="Opções" aria-label="Opções nome">→</a>
+              <a class="btn-icon btn-link" href="../pages/nome.html" title="Gerador de nome" aria-label="Abrir ecrã do gerador de nome">→</a>
             </td>
           </tr>
           <tr data-kind="guid">

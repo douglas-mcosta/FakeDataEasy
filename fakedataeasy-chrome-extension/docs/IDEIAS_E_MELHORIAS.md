@@ -1,10 +1,16 @@
 # Ideias e melhorias — Fake Data Easy
 
-Documento vivo com **sugestões de produto** e **melhorias técnicas** para evoluções futuras da extensão. Nada disto está comprometido no roadmap; serve para priorizar e discutir.
+Documento vivo com **sugestões de produto** e **melhorias técnicas**. Alguns itens do plano inicial **já estão implementados** (v2.2+) — ver secções com estado **Feito**.
 
 ---
 
-## 1. Ícones ao lado do campo focado (content script)
+## 1. Ícones ao lado do campo focado (content script) — **Feito (parcial)**
+
+Implementado como barra fixa com **Auto** e **Escolher**, só nas origens da lista configurável (`src/content/field-helper.ts`). Pendências possíveis: iframes, file://, toggle “desligar helper” sem remover sites.
+
+---
+
+## 1b. (histórico) Texto original da ideia
 
 **Ideia:** Com a extensão instalada, ao **focar ou clicar num `<input>` ou `<textarea>`**, aparecer um pequeno controlo (ícone ou chip) junto ao campo, ancorado à posição do elemento.
 
@@ -25,9 +31,11 @@ Documento vivo com **sugestões de produto** e **melhorias técnicas** para evol
 
 ---
 
-## 2. Deteção heurística do tipo de campo (“parece e-mail”)
+## 2. Deteção heurística do tipo de campo (“parece e-mail”) — **Feito**
 
-**Ideia:** O **ícone automático** usa regras simples para adivinhar o dado:
+Lógica central em `src/lib/field-heuristics.ts` (type, inputmode, autocomplete, name/id/placeholder/aria-label/class, maxLength). Geradores extra: telefone BR, data ISO, URL de teste.
+
+**Ideia original:** O **ícone automático** usa regras simples para adivinhar o dado:
 
 - `type="email"` ou `inputmode="email"` ou `autocomplete` contém `email` → gerar **e-mail fictício**.
 - `name`, `id`, `placeholder`, `aria-label` com padrões (`cpf`, `cnpj`, `phone`, `tel`, `birth`, `data`, etc.) → mapear para gerador correspondente.
@@ -39,9 +47,11 @@ Documento vivo com **sugestões de produto** e **melhorias técnicas** para evol
 
 ---
 
-## 3. Dois ícones distintos (Auto vs Escolher)
+## 3. Dois ícones distintos (Auto vs Escolher) — **Feito**
 
-Proposta alinhada com o que descreveste:
+Dois controlos distintos no content script: **Auto** (ícone raio + texto) e **Escolher** (ícone lista + texto), com `title` / `aria-label` em português. Secundário: dica amarela quando a inferência é marcada como ambígua.
+
+Proposta original:
 
 | Controlo | Papel |
 |----------|--------|
@@ -78,11 +88,10 @@ Qualquer funcionalidade que **injecte UI em páginas de terceiros** deve:
 
 ## 6. Possível ordem de implementação (técnica)
 
-1. Opções da extensão (`options.html` ou secção no popup) com toggle **Inject field helpers: on/off**.
-2. Content script mínimo: só mostrar ícone em **localhost** e **127.0.0.1** primeiro (menos fricção na loja).
-3. Popover “manual” com os mesmos tipos que o popup.
-4. Heurísticas + ícone “Auto”.
-5. Alargar hosts permitidos conforme feedback e requisitos da loja.
+1. ~~Opções + lista de sites; popup “Adicionar este site”.~~ **Feito**
+2. ~~Content script + Shadow DOM + Auto / Escolher.~~ **Feito**
+3. ~~Heurísticas.~~ **Feito**
+4. Pendente: toggle global “desligar helper”; atalho de teclado para abrir **Escolher** com o campo focado; iframes; overrides por selector (ítem “Extra” da §2).
 
 ---
 

@@ -3,7 +3,29 @@ import { CNPJ } from '../lib/cnpj';
 import { CPF } from '../lib/cpf';
 import { gerarGuid } from '../lib/guid';
 import { gerarNome } from '../lib/nome';
+import {
+  ALLOWED_SITES_STORAGE_KEY,
+  ensureDefaultSitePatterns,
+} from '../lib/storage-sites';
+import { resyncFieldHelperScripts } from './content-scripts-registry';
 import { writeTextFromServiceWorker } from './clipboard-sw';
+
+async function bootstrap(): Promise<void> {
+  await ensureDefaultSitePatterns();
+  await resyncFieldHelperScripts();
+}
+
+void bootstrap();
+
+chrome.runtime.onInstalled.addListener(() => {
+  void bootstrap();
+});
+
+chrome.storage.onChanged.addListener((changes, area) => {
+  if (area === 'local' && changes[ALLOWED_SITES_STORAGE_KEY]) {
+    void resyncFieldHelperScripts();
+  }
+});
 
 function textoParaComando(command: string): string | null {
   switch (command) {
@@ -27,7 +49,7 @@ chrome.commands.onCommand.addListener((command) => {
     try {
       await writeTextFromServiceWorker(text);
     } catch {
-      /* Evitar exceção não tratada no SW; opcional: notificação futura */
+      /* silencioso */
     }
   })();
 });

@@ -3,8 +3,11 @@ import {
   gerarNomeFeminino,
   gerarNomeMasculino,
 } from '../src/lib/nome';
+import { initThemeOnPage } from '../src/lib/theme';
 
 document.documentElement.lang = 'pt-BR';
+
+void initThemeOnPage();
 
 const input = document.getElementById('nome-input') as HTMLInputElement;
 const btnGerar = document.getElementById('nome-gerar') as HTMLButtonElement;

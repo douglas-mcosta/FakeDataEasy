@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Fake Data Easy",
-  "version": "2.1.0",
-  "description": "Gera CPF, CNPJ, nomes e GUID para testar formulários. Atalhos globais (teclas padrão Ctrl+Shift+1–4; altere em chrome://extensions → Atalhos). Não envia dados para a rede.",
+  "version": "2.2.0",
+  "description": "Gera CPF, CNPJ, nomes e GUID para testar formulários. Atalhos globais (Ctrl+Shift+1–4). Helper opcional em campos nos sites que configurar. Não envia dados para a rede.",
   "minimum_chrome_version": "109",
   "action": {
     "default_popup": "popup/index.html",
@@ -11,6 +11,10 @@
       "16": "assets/FakeDataEasy-16.png",
       "32": "assets/FakeDataEasy-32.png"
     }
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
   },
   "background": {
     "service_worker": "background.js",
@@ -56,5 +60,18 @@
     "48": "assets/FakeDataEasy-48.png",
     "128": "assets/FakeDataEasy-128.png"
   },
-  "permissions": ["clipboardWrite", "offscreen"]
+  "permissions": [
+    "activeTab",
+    "clipboardWrite",
+    "offscreen",
+    "scripting",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "http://localhost/*",
+    "http://127.0.0.1/*",
+    "https://localhost/*"
+  ],
+  "optional_host_permissions": ["http://*/*", "https://*/*"]
 }

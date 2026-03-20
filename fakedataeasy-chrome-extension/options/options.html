@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fake Data Easy — Configurações</title>
+    <link rel="stylesheet" href="./options.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <h1>Configurações</h1>
+
+      <fieldset class="theme-fieldset">
+        <legend>Aparência</legend>
+        <div class="theme-options">
+          <label>
+            <input type="radio" name="fde-theme" value="system" checked />
+            Automático (seguir o sistema)
+          </label>
+          <label>
+            <input type="radio" name="fde-theme" value="light" />
+            Claro
+          </label>
+          <label>
+            <input type="radio" name="fde-theme" value="dark" />
+            Escuro
+          </label>
+        </div>
+        <p class="theme-hint">O popup e as páginas de geradores usam esta definição. “Automático” actualiza quando o tema do sistema muda.</p>
+      </fieldset>
+
+      <h2>Sites com helper nos campos</h2>
+      <p class="lead">
+        A extensão injecta os botões ⚡ e ☰ apenas nas origens desta lista. Por defeito:
+        <code>localhost</code> e <code>127.0.0.1</code>.
+      </p>
+
+      <section>
+        <h2>Lista actual</h2>
+        <ul id="site-list" class="site-list"></ul>
+      </section>
+
+      <section>
+        <h2>Adicionar por texto</h2>
+        <p class="hint">
+          Um site por linha (URL completa ou domínio). Ex.: <code>https://meuapp.dev</code> ou
+          <code>app.cliente.com</code>
+        </p>
+        <textarea id="manual-sites" rows="5" placeholder="https://staging.minhaempresa.com"></textarea>
+        <div class="row">
+          <button type="button" id="btn-merge" class="primary">Adicionar à lista</button>
+          <button type="button" id="btn-replace" class="secondary">Substituir lista inteira</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>Repor só o defaults</h2>
+        <button type="button" id="btn-defaults" class="secondary">localhost + 127.0.0.1 (+ https localhost)</button>
+      </section>
+
+      <p id="status" class="status" aria-live="polite"></p>
+    </main>
+    <script type="module" src="./options.ts"></script>
+  </body>
+</html>

@@ -15,6 +15,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         popup: resolve(__dirname, 'popup/index.html'),
+        options: resolve(__dirname, 'options/options.html'),
         cpf: resolve(__dirname, 'pages/cpf.html'),
         cnpj: resolve(__dirname, 'pages/cnpj.html'),
         nome: resolve(__dirname, 'pages/nome.html'),
