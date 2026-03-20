@@ -1,6 +1,7 @@
 import { copyToClipboard } from '../src/lib/clipboard';
 import { CPF } from '../src/lib/cpf';
 import { formatCpfDigits } from '../src/lib/format-br';
+import { clearHistory, downloadCsv, getHistory, recordGenerated } from '../src/lib/generation-history';
 import { onlyNumbers } from '../src/lib/string-utils';
 import { initThemeOnPage } from '../src/lib/theme';
 
@@ -47,6 +48,7 @@ input.addEventListener('input', () => {
 
 btnGerar.addEventListener('click', async () => {
   const raw = CPF.gerarSemPontos();
+  recordGenerated('cpf', raw);
   await copyToClipboard(raw);
   applyCpfDisplay(raw);
   validMsg.hidden = true;
@@ -63,3 +65,16 @@ form.addEventListener('submit', (e) => {
 });
 
 applyCpfDisplay('');
+
+document.getElementById('cpf-export')?.addEventListener('click', () => {
+  const rows = getHistory('cpf');
+  if (rows.length === 0) {
+    window.alert('Gere pelo menos um CPF com «↻ Gerar» antes de exportar.');
+    return;
+  }
+  downloadCsv('fake-data-easy-cpf.csv', 'cpf', rows);
+});
+
+document.getElementById('cpf-clear-hist')?.addEventListener('click', () => {
+  clearHistory('cpf');
+});

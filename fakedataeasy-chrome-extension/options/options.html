@@ -8,7 +8,10 @@
   </head>
   <body>
     <main class="wrap">
-      <h1>Configurações</h1>
+      <header class="options-brand">
+        <img src="../assets/logo-icon.svg" width="40" height="40" alt="" class="options-brand-mark" />
+        <h1>Configurações</h1>
+      </header>
 
       <fieldset class="theme-fieldset">
         <legend>Aparência</legend>
@@ -27,6 +30,21 @@
           </label>
         </div>
         <p class="theme-hint">O popup e as páginas de geradores usam esta definição. “Automático” actualiza quando o tema do sistema muda.</p>
+      </fieldset>
+
+      <fieldset class="theme-fieldset">
+        <legend>Helper nos campos</legend>
+        <label class="helper-toggle">
+          <input type="checkbox" id="field-helper-enabled" checked />
+          Mostrar botões Auto e Escolher junto aos campos (em sites permitidos, incluindo iframes)
+        </label>
+        <p class="theme-hint">
+          Se desligar, deixa de injectar o helper; os atalhos globais (CPF, nome, etc.) continuam a funcionar.
+          Atalho para abrir «Escolher» com o campo focado: defina em
+          <code>chrome://extensions/shortcuts</code> o comando «Abrir menu Escolher…» (o Chrome limita a
+          <strong>quatro</strong> teclas sugeridas no manifest; CPF–GUID usam Ctrl+Shift+1–4). Dentro da página use
+          <kbd>Alt+Shift+E</kbd> (útil em iframes).
+        </p>
       </fieldset>
 
       <h2>Sites com helper nos campos</h2>
@@ -58,7 +76,41 @@
         <button type="button" id="btn-defaults" class="secondary">localhost + 127.0.0.1 (+ https localhost)</button>
       </section>
 
+      <h2>Overrides por URL e selector</h2>
+      <p class="lead">
+        Força o tipo de dado no botão <strong>Auto</strong> quando a página coincide com o padrão e o campo com o
+        selector CSS. Padrão de URL no estilo Chrome: <code>https://exemplo.com/*</code>.
+      </p>
+      <section class="overrides-section">
+        <ul id="override-list" class="override-list"></ul>
+        <div class="override-form">
+          <div class="override-row">
+            <label>
+              Padrão de URL
+              <input type="text" id="override-pattern" placeholder="https://meuapp.com/*" autocomplete="off" />
+            </label>
+            <label>
+              Selector CSS
+              <input type="text" id="override-selector" placeholder="#id-cpf, input[name=&quot;doc&quot;]" autocomplete="off" />
+            </label>
+            <label>
+              Tipo
+              <select id="override-kind"></select>
+            </label>
+          </div>
+          <button type="button" id="btn-add-override" class="primary">Adicionar regra</button>
+        </div>
+      </section>
+
       <p id="status" class="status" aria-live="polite"></p>
+
+      <p class="privacy-footer">
+        <a
+          href="https://github.com/douglas-mcosta/FakeDataEasy/blob/master/fakedataeasy-chrome-extension/PRIVACY.md"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Política de privacidade (Fake Data Easy)</a>
+      </p>
     </main>
     <script type="module" src="./options.ts"></script>
   </body>

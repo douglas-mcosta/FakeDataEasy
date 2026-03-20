@@ -1,6 +1,7 @@
 import { copyToClipboard } from '../src/lib/clipboard';
 import { CNPJ } from '../src/lib/cnpj';
 import { CPF } from '../src/lib/cpf';
+import { gerarCep } from '../src/lib/cep';
 import { gerarGuid } from '../src/lib/guid';
 import { gerarNome } from '../src/lib/nome';
 import { addAllowedPattern } from '../src/lib/storage-sites';
@@ -36,6 +37,9 @@ async function handleCopy(kind: string, row: HTMLElement): Promise<void> {
       break;
     case 'nome':
       value = gerarNome();
+      break;
+    case 'cep':
+      value = gerarCep('qualquer', false);
       break;
     case 'guid':
       value = gerarGuid();

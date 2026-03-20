@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CEP — Fake Data Easy</title>
+    <link rel="stylesheet" href="../popup/styles.css" />
+  </head>
+  <body>
+    <div class="shell page-options">
+      <div class="logo-wrap">
+        <img class="logo" src="../assets/logo-icon.svg" alt="" width="44" height="44" />
+      </div>
+
+      <form id="cep-form" class="options-form">
+        <div class="field-row">
+          <select id="cep-regiao" aria-label="Região do CEP"></select>
+        </div>
+
+        <div class="field-row">
+          <input id="cep-input" type="text" inputmode="numeric" autocomplete="off" placeholder="CEP" maxlength="9" />
+          <button type="button" id="cep-gerar" class="btn-gerar">↻ Gerar</button>
+        </div>
+
+        <div class="radio-row">
+          <label>
+            <input type="radio" name="cepMask" value="1" checked />
+            Com hífen (00000-000)
+          </label>
+          <label>
+            <input type="radio" name="cepMask" value="0" />
+            Só 8 dígitos
+          </label>
+        </div>
+
+        <p id="cep-hint" class="lead" style="margin-top: 0">
+          Amostras de CEPs reais por cidade/região — apenas para testes de formulário.
+        </p>
+
+        <div class="page-actions">
+          <a class="btn-back" href="../popup/index.html" title="Menu">←</a>
+          <button type="button" id="cep-export" class="btn-export">Exportar CSV</button>
+        </div>
+        <button type="button" id="cep-clear-hist" class="btn-link-quiet">Limpar histórico (sessão)</button>
+        <p class="export-hint">Só valores gerados com «↻ Gerar» entram na lista desta sessão.</p>
+      </form>
+    </div>
+    <script type="module" src="./cep.ts"></script>
+  </body>
+</html>

@@ -4,14 +4,52 @@
  */
 import { CNPJ } from '../lib/cnpj';
 import { CPF } from '../lib/cpf';
+import { gerarCep } from '../lib/cep';
 import { gerarDataIsoAleatoria } from '../lib/data-fake';
 import { gerarEmailFake } from '../lib/email';
 import { inferAutoForField } from '../lib/field-heuristics';
 import { gerarGuid } from '../lib/guid';
-import { gerarNome } from '../lib/nome';
+import { gerarNome, gerarNomeCompleto } from '../lib/nome';
 import { gerarTelefoneCelularBR } from '../lib/telefone-br';
+import {
+  getSelectorOverrides,
+  type OverrideKind,
+  pageUrlMatchesPattern,
+  SELECTOR_OVERRIDES_KEY,
+  type SelectorOverrideRule,
+} from '../lib/storage-field-helper';
 
 const HOST_ID = 'fde-field-helper-host';
+
+/** Sincronizado com `service-worker`: `executeScript` não pode fechar sobre imports. */
+const OPEN_CHOOSE_MENU_EVENT = 'fde-open-choose-menu';
+
+let selectorRules: SelectorOverrideRule[] = [];
+
+void getSelectorOverrides().then((r) => {
+  selectorRules = r;
+});
+
+chrome.storage.onChanged.addListener((changes, area) => {
+  if (area === 'local' && changes[SELECTOR_OVERRIDES_KEY]) {
+    void getSelectorOverrides().then((rules) => {
+      selectorRules = rules;
+    });
+  }
+});
+
+function effectiveOverrideKind(el: HTMLInputElement | HTMLTextAreaElement): OverrideKind | null {
+  const url = location.href;
+  for (const rule of selectorRules) {
+    try {
+      if (!pageUrlMatchesPattern(url, rule.pattern)) continue;
+      if (el.matches(rule.selector)) return rule.kind;
+    } catch {
+      /* selector inválido */
+    }
+  }
+  return null;
+}
 
 function isFillable(el: EventTarget | null): el is HTMLInputElement | HTMLTextAreaElement {
   if (!el || !(el instanceof HTMLElement)) return false;
@@ -38,12 +76,16 @@ function valueForGen(kind: string): string | null {
       return CNPJ.gerarSemPontos();
     case 'nome':
       return gerarNome();
+    case 'nome_completo':
+      return gerarNomeCompleto(Math.random() < 0.5);
     case 'email':
       return gerarEmailFake();
     case 'guid':
       return gerarGuid();
     case 'tel':
       return gerarTelefoneCelularBR();
+    case 'cep':
+      return gerarCep();
     case 'data':
       return gerarDataIsoAleatoria();
     default:
@@ -73,6 +115,23 @@ function scheduleHide(): void {
     if (hint) hint.style.display = 'none';
     activeEl = null;
   }, 220);
+}
+
+function positionMenuBelowBar(): void {
+  if (!menu || !bar) return;
+  const br = bar.getBoundingClientRect();
+  menu.style.top = `${br.bottom + 2}px`;
+  menu.style.left = `${br.left}px`;
+}
+
+function openChooseMenu(): void {
+  const el = document.activeElement;
+  if (!isFillable(el)) return;
+  showFor(el);
+  if (!menu || !bar) return;
+  menu.style.display = 'block';
+  positionMenuBelowBar();
+  cancelHide();
 }
 
 function positionBar(target: HTMLElement): void {
@@ -245,8 +304,10 @@ function initUi(): void {
     ['cpf', 'CPF'],
     ['cnpj', 'CNPJ'],
     ['nome', 'Nome'],
+    ['nome_completo', 'Nome completo'],
     ['email', 'E-mail'],
     ['tel', 'Telefone (BR)'],
+    ['cep', 'CEP'],
     ['data', 'Data (ISO)'],
     ['guid', 'GUID'],
   ];
@@ -278,24 +339,31 @@ function initUi(): void {
     if (!t || !activeEl) return;
     const act = t.dataset.act;
     if (act === 'auto') {
-      const r = inferAutoForField(activeEl);
-      setFieldValue(activeEl, r.value);
-      if (r.ambiguous) {
-        showHint(`${r.kindLabel}. Se não for o pretendido, use «Escolher».`);
-        cancelHide();
-        window.setTimeout(scheduleHide, 3200);
+      const ov = effectiveOverrideKind(activeEl);
+      if (ov) {
+        const v = valueForGen(ov);
+        if (v) {
+          setFieldValue(activeEl, v);
+          showHint('Tipo definido pela regra de selector nas opções.');
+          cancelHide();
+          window.setTimeout(scheduleHide, 2800);
+        }
       } else {
-        showHint('');
-        scheduleHide();
+        const r = inferAutoForField(activeEl);
+        setFieldValue(activeEl, r.value);
+        if (r.ambiguous) {
+          showHint(`${r.kindLabel}. Se não for o pretendido, use «Escolher».`);
+          cancelHide();
+          window.setTimeout(scheduleHide, 3200);
+        } else {
+          showHint('');
+          scheduleHide();
+        }
       }
     } else if (act === 'menu') {
       const open = menu!.style.display === 'block';
       menu!.style.display = open ? 'none' : 'block';
-      if (!open && bar) {
-        const br = bar.getBoundingClientRect();
-        menu!.style.top = `${br.bottom + 2}px`;
-        menu!.style.left = `${br.left}px`;
-      }
+      if (!open) positionMenuBelowBar();
     }
   });
 
@@ -327,6 +395,7 @@ document.addEventListener(
   () => {
     if (activeEl && bar && bar.style.display !== 'none') {
       positionBar(activeEl);
+      if (menu && menu.style.display === 'block') positionMenuBelowBar();
     }
   },
   true,
@@ -335,5 +404,25 @@ document.addEventListener(
 window.addEventListener('resize', () => {
   if (activeEl && bar && bar.style.display !== 'none') {
     positionBar(activeEl);
+    if (menu && menu.style.display === 'block') positionMenuBelowBar();
   }
 });
+
+document.addEventListener(
+  OPEN_CHOOSE_MENU_EVENT,
+  () => {
+    openChooseMenu();
+  },
+  false,
+);
+
+document.addEventListener(
+  'keydown',
+  (e) => {
+    if (!e.altKey || !e.shiftKey) return;
+    if (e.key !== 'e' && e.key !== 'E') return;
+    e.preventDefault();
+    openChooseMenu();
+  },
+  true,
+);

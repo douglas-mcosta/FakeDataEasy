@@ -23,7 +23,44 @@ body {
 
 .logo-wrap {
   text-align: center;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+}
+
+.logo-wrap.brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: left;
+}
+
+.brand-mark {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.12);
+}
+
+.brand-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.brand-title {
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--fde-text);
+  line-height: 1.2;
+}
+
+.brand-sub {
+  font-size: 11px;
+  color: var(--fde-text-muted);
+  line-height: 1.25;
 }
 
 .logo {
@@ -261,6 +298,22 @@ button.section-title:focus-visible {
   outline-offset: 0;
 }
 
+.field-row select {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--fde-border-muted);
+  border-radius: 4px;
+  background: var(--fde-surface-input);
+  color: var(--fde-text);
+  font-size: 13px;
+}
+
+.field-row select:focus {
+  outline: 2px solid var(--fde-accent);
+  outline-offset: 0;
+}
+
 .field-row input.valid {
   border-color: var(--fde-success);
 }
@@ -351,6 +404,39 @@ button.section-title:focus-visible {
   color: var(--fde-text-muted);
   font-size: 12px;
   cursor: not-allowed;
+}
+
+.btn-export {
+  padding: 6px 10px;
+  border: 1px solid var(--fde-accent);
+  border-radius: 4px;
+  background: var(--fde-accent-soft);
+  color: var(--fde-accent-label);
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-export:hover {
+  background: var(--fde-accent-soft-hover);
+}
+
+.btn-link-quiet {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--fde-link);
+  font-size: 11px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.export-hint {
+  font-size: 10px;
+  color: var(--fde-text-muted);
+  margin: 4px 0 0;
+  text-align: center;
+  width: 100%;
 }
 
 .btn-validar {

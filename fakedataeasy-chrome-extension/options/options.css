@@ -17,6 +17,23 @@ body {
   margin: 0 auto;
 }
 
+.options-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.options-brand-mark {
+  flex-shrink: 0;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.1);
+}
+
+.options-brand h1 {
+  margin: 0;
+}
+
 h1 {
   font-size: 1.35rem;
   margin: 0 0 8px;
@@ -122,6 +139,17 @@ button:hover {
   color: var(--fde-error);
 }
 
+.privacy-footer {
+  margin-top: 28px;
+  padding-top: 16px;
+  border-top: 1px solid var(--fde-border);
+  font-size: 13px;
+}
+
+.privacy-footer a {
+  color: var(--fde-accent);
+}
+
 .theme-fieldset {
   border: 1px solid var(--fde-border);
   border-radius: 8px;
@@ -153,4 +181,85 @@ button:hover {
   margin: 10px 0 0;
   font-size: 13px;
   color: var(--fde-text-muted);
+}
+
+.helper-toggle {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.helper-toggle input {
+  accent-color: var(--fde-accent);
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 2px 6px;
+  font-size: 12px;
+  font-family: ui-monospace, monospace;
+  background: var(--fde-code-bg);
+  border: 1px solid var(--fde-border-muted);
+  border-radius: 4px;
+}
+
+.overrides-section {
+  margin-top: 8px;
+}
+
+.override-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+}
+
+.override-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 10px;
+  background: var(--fde-surface);
+  border: 1px solid var(--fde-border);
+  border-radius: 6px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.override-desc {
+  word-break: break-word;
+}
+
+.override-desc code {
+  word-break: break-all;
+}
+
+.override-form .override-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.override-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--fde-text-muted);
+}
+
+.override-form input,
+.override-form select {
+  padding: 8px 10px;
+  border: 1px solid var(--fde-border-muted);
+  border-radius: 6px;
+  background: var(--fde-surface-input);
+  color: var(--fde-text);
+  font-size: 14px;
 }

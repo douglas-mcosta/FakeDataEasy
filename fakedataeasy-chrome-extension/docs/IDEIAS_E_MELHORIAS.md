@@ -6,7 +6,7 @@ Documento vivo com **sugestões de produto** e **melhorias técnicas**. Alguns i
 
 ## 1. Ícones ao lado do campo focado (content script) — **Feito (parcial)**
 
-Implementado como barra fixa com **Auto** e **Escolher**, só nas origens da lista configurável (`src/content/field-helper.ts`). Pendências possíveis: iframes, file://, toggle “desligar helper” sem remover sites.
+Implementado como barra fixa com **Auto** e **Escolher**, só nas origens da lista configurável (`src/content/field-helper.ts`). **Iframes:** content script com `allFrames` + atalho local **Alt+Shift+E**; comando global **«Abrir menu Escolher»** (sem tecla sugerida no manifest — limite de 4 do Chrome; configurar em Atalhos) usa `executeScript` em todos os frames. **Toggle** nas opções desliga o inject do helper sem apagar a lista de sites. **file://** continua fora do âmbito.
 
 ---
 
@@ -41,7 +41,7 @@ Lógica central em `src/lib/field-heuristics.ts` (type, inputmode, autocomplete,
 - `name`, `id`, `placeholder`, `aria-label` com padrões (`cpf`, `cnpj`, `phone`, `tel`, `birth`, `data`, etc.) → mapear para gerador correspondente.
 - Campos com **máscara** ou **comprimento máximo** (ex.: 11 para CPF) podem reforçar a hipótese.
 
-**Extra:** permitir ao utilizador **sobrepor** a heurística (“neste site trata sempre este campo como CPF”) guardado em `chrome.storage.local` com chave por origem + selector (avançado).
+**Extra — Feito:** overrides por **padrão de URL** + **selector CSS** + tipo de gerador, em `chrome.storage.local` (`fde_selector_overrides` / API em `storage-field-helper.ts`); o botão **Auto** usa a regra quando o URL e o campo coincidem.
 
 **Risco:** falsos positivos; manter sempre o **ícone manual** visível para corrigir num clique.
 
@@ -80,9 +80,10 @@ Proposta original:
 
 Qualquer funcionalidade que **injecte UI em páginas de terceiros** deve:
 
-- Explicar **por que** precisa de hosts ou `activeTab`.
-- Manter **política de privacidade** actualizada (“não lemos o conteúdo dos campos para servidores externos”; se houver heurística, é **local**).
-- Oferecer **desligar totalmente** o content script para quem só quer popup + atalhos.
+- Explicar **por que** precisa de hosts ou `activeTab` — ver justificativas prontas em [`docs/CHROME_WEB_STORE.md`](./CHROME_WEB_STORE.md) (secção 4).
+- Manter **política de privacidade** pública (HTTPS) e coerente com o pacote: [`../PRIVACY.md`](../PRIVACY.md) (URLs sugeridas no guia).
+- Oferecer **desligar totalmente** o content script — **Feito:** toggle «Helper nos campos» nas opções.
+- Preencher **Data safety** / permissões no painel sem contradições com o código; checklist completo no mesmo guia.
 
 ---
 
@@ -91,7 +92,7 @@ Qualquer funcionalidade que **injecte UI em páginas de terceiros** deve:
 1. ~~Opções + lista de sites; popup “Adicionar este site”.~~ **Feito**
 2. ~~Content script + Shadow DOM + Auto / Escolher.~~ **Feito**
 3. ~~Heurísticas.~~ **Feito**
-4. Pendente: toggle global “desligar helper”; atalho de teclado para abrir **Escolher** com o campo focado; iframes; overrides por selector (ítem “Extra” da §2).
+4. ~~Toggle global “desligar helper”; atalho global configurável + **Alt+Shift+E** na página; iframes (`allFrames` + `executeScript`); overrides por selector.~~ **Feito**
 
 ---
 

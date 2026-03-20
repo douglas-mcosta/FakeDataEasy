@@ -8,11 +8,15 @@
   </head>
   <body>
     <div class="shell menu">
-      <div class="logo-wrap">
-        <img class="logo" src="/assets/FakeDataEasy2.png" alt="Fake Data Easy" width="180" height="auto" />
+      <div class="logo-wrap brand">
+        <img class="brand-mark" src="/assets/logo-icon.svg" width="48" height="48" alt="" />
+        <div class="brand-copy">
+          <span class="brand-title">Fake Data Easy</span>
+          <span class="brand-sub">Dados fictícios para testes</span>
+        </div>
       </div>
 
-      <div class="section-title"><span class="section-icon">🌐</span> Site actual</div>
+      <div class="section-title"><span class="section-icon">🌐</span> Site atual</div>
       <div class="site-panel">
         <p id="current-site-label" class="site-label">—</p>
         <div class="site-actions">
@@ -64,6 +68,18 @@
               <a class="btn-icon btn-link" href="../pages/nome.html" title="Gerador de nome" aria-label="Abrir ecrã do gerador de nome">→</a>
             </td>
           </tr>
+          <tr data-kind="cep">
+            <td class="cell-label">
+              Gerar CEP
+              <div class="preview" hidden></div>
+            </td>
+            <td class="cell-actions">
+              <button type="button" class="btn-icon btn-copy" title="Gerar e copiar (8 dígitos)" aria-label="Gerar e copiar CEP">📋</button>
+            </td>
+            <td class="cell-actions">
+              <a class="btn-icon btn-link" href="../pages/cep.html" title="CEP por região" aria-label="Abrir ecrã do gerador CEP">→</a>
+            </td>
+          </tr>
           <tr data-kind="guid">
             <td class="cell-label">
               Gerar Guid <small class="shortcut">(Ctrl+Shift+4)</small>
@@ -80,6 +96,12 @@
       <footer class="footer">
         <small>Desenvolvido por Douglas M. Costa</small>
         <p class="footer-links">
+          <a
+            href="https://github.com/douglas-mcosta/FakeDataEasy/blob/master/fakedataeasy-chrome-extension/PRIVACY.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Privacidade</a>
+          <span class="sep">|</span>
           <a href="https://www.linkedin.com/in/douglas-mcosta" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           <span class="sep">|</span>
           <a href="https://github.com/douglas-mcosta" target="_blank" rel="noopener noreferrer">GitHub</a>

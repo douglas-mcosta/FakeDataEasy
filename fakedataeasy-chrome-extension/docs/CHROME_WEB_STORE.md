@@ -1,95 +1,131 @@
-# Guia de publicação — Chrome Web Store (Fase G)
+# Guia de publicação — Chrome Web Store
 
-Checklist e textos auxiliares para submeter **Fake Data Easy** (MV3).
+Checklist e textos auxiliares para submeter **Fake Data Easy** (Manifest V3), alinhado às exigências de [Programa de desenvolvimento de extensões](https://developer.chrome.com/docs/webstore/program-policies) e ao questionário **Data safety** do painel.
 
 ## 1. Antes de carregar o pacote
 
 1. `npm ci`
 2. `npm run build` — pasta `dist/` com `manifest.json` na raiz.
 3. Teste **Carregar sem compactação** em `chrome://extensions` apontando para `dist/`.
-4. (Opcional) `npm run zip` — gera `fake-data-easy-chrome-<versão>.zip` na raiz do projeto da extensão (conteúdo = interior de `dist/`, sem pasta extra).
+4. (Opcional) `npm run zip` — gera `fake-data-easy-chrome-<versão>.zip` na raiz do projecto da extensão (conteúdo = interior de `dist/`, sem pasta extra).
 
-## 2. Testes manuais (Windows e outros)
+## 2. Testes manuais
 
 Marque após validar:
 
-- [ ] **Popup:** gerar CPF, CNPJ, nome, GUID pelos botões; texto aparece e copia (colar noutra app).
-- [ ] **Páginas** CPF / CNPJ / Nome: gerar, máscaras, validação CPF/CNPJ, voltar ao menu.
-- [ ] **Atalhos globais** `Ctrl+Shift+1` … `4` (ou os que definiu em **Extensões → Atalhos**): copiam o tipo certo sem abrir o popup.
-- [ ] Se um atalho **não dispara**, verifique conflito com outra extensão ou atalho do SO — reatribua em `chrome://extensions/shortcuts`.
-- [ ] **Atualização:** subir versão em `public/manifest.json` e `package.json` antes de um novo envio.
+- [ ] **Popup:** gerar CPF, CNPJ, nome, CEP, GUID; cópia e colar noutra app.
+- [ ] **Páginas** CPF / CNPJ / Nome / CEP.
+- [ ] **Atalhos globais** `Ctrl+Shift+1` … `4` (ou os definidos em **Extensões → Atalhos**).
+- [ ] **Helper** (site na lista): Auto, Escolher, **ligar/desligar** nas opções (confirma que desliga o inject).
+- [ ] **Atalho** “Abrir menu Escolher” (se atribuído em Atalhos) ou **Alt+Shift+E** na página.
+- [ ] **Overrides** por selector (opções): regra aplicada no Auto.
+- [ ] Subir **versão** em `public/manifest.json` e `package.json` antes de cada envio.
 
-## 3. Política de privacidade (URL pública)
+## 3. Política de privacidade (URL HTTPS)
 
-A loja exige uma **URL HTTPS** para a política de privacidade.
+A loja exige um URL **HTTPS** estável.
 
-1. Faça commit de [`../PRIVACY.md`](../PRIVACY.md) no repositório público.
-2. Utilize por exemplo o endereço **raw** do GitHub (substitua utilizador, repo e caminho):
+**Repositório oficial:** `https://github.com/douglas-mcosta/FakeDataEasy`
 
-   `https://raw.githubusercontent.com/SEU_USUARIO/SEU_REPO/master/fakedataeasy-chrome-extension/PRIVACY.md`
+| Uso | URL sugerida |
+|-----|----------------|
+| Campo “Privacy policy” no painel (Markdown legível) | `https://raw.githubusercontent.com/douglas-mcosta/FakeDataEasy/master/fakedataeasy-chrome-extension/PRIVACY.md` |
+| Ligação humana no popup / opções | `https://github.com/douglas-mcosta/FakeDataEasy/blob/master/fakedataeasy-chrome-extension/PRIVACY.md` |
 
-   Ou publique a mesma informação numa página `https://…` sua.
+Confirme que o branch (`master`) corresponde ao que usa no GitHub. O popup e este documento devem usar o **mesmo** URL que colar na loja (ou uma página HTTPS equivalente).
 
-3. No painel da loja, cole essa URL no campo de política de privacidade.
+## 4. Justificação de permissões (copiar para o formulário da loja)
 
-**Contacto:** edite o fim de `PRIVACY.md` com email ou link real antes de submeter.
-
-## 4. Justificação de permissões (copiar/colar no formulário da loja)
+Use **Português** ou **English** conforme o painel. Textos alinhados ao `manifest.json` actual.
 
 ### clipboardWrite
 
-**Português:**  
-“A extensão só escreve na área de transferência o CPF, CNPJ, nome ou GUID que o utilizador acaba de gerar por botão ou atalho, para poder colar noutro campo ou aplicação. Não lê nem envia o conteúdo da área de transferência para a rede.”
+**PT:** A extensão só escreve na área de transferência valores que o utilizador acabou de gerar (CPF, CNPJ, nome, etc.) por botão, ecrã de gerador ou atalho. Não lê a área de transferência nem envia o seu conteúdo para a rede.
 
-**English (se o formulário pedir em inglês):**  
-“The extension writes to the clipboard only the CPF, CNPJ, name, or GUID the user just generated via a toolbar action or keyboard shortcut, so they can paste it elsewhere. It does not read the clipboard or send clipboard contents over the network.”
+**EN:** The extension writes to the clipboard only values the user just generated via a button, generator page, or shortcut. It does not read the clipboard or exfiltrate clipboard data.
 
 ### offscreen
 
-**Português:**  
-“Utilizada apenas para um documento invisível com motivo `CLIPBOARD`, quando o Chrome não permite copiar diretamente a partir do service worker ao usar atalhos globais. Não exibe interface nem recolhe dados.”
+**PT:** Usada apenas para um documento invisível com motivo `CLIPBOARD`, quando o Chrome não permite copiar directamente do service worker ao usar atalhos globais. Não mostra UI nem recolhe dados para servidores.
+
+**EN:** Used only for an invisible offscreen document with the `CLIPBOARD` reason when the browser cannot write to the clipboard from the service worker for global shortcuts. No UI; no data collection or transmission.
 
 ### tabs
 
-**Português:**  
-“Usada só para abrir o separador da página de configurações da extensão (lista de sites, tema) quando o utilizador clica em **Configurações** ou **Gerir lista** no popup. A extensão não lê o histórico nem o conteúdo dos sites do utilizador através desta permissão.”
+**PT:** Usada para abrir o separador das **opções** da extensão quando o utilizador escolhe Configurar / Gerir lista. Não serve para ler histórico nem conteúdo de páginas web.
 
-**English:**  
-“Used only to open a tab showing the extension’s settings page (site list, theme) when the user clicks **Settings** or **Manage list** in the popup. The extension does not read browsing history or page content through this permission.”
+**EN:** Used to open a tab with the extension’s options page when the user opens settings from the popup. Not used to read browsing history or page content.
+
+### activeTab
+
+**PT:** Permite ler o **URL do separador activo** quando o utilizador clica em **Adicionar este site** no popup, e permite usar scripting **nessa página** depois de um gesto explícito (ex.: atalho opcional que abre o menu “Escolher” no helper). Não monitoriza a navegação em segundo plano.
+
+**EN:** Grants temporary access to the active tab when the user invokes “Add this site” in the popup (to read the tab URL) and for user-gesture actions like an optional shortcut that opens the in-page “Choose” menu. It is not used for background tracking.
+
+### scripting
+
+**PT:** Regista o content script do **helper** apenas nos hosts que o utilizador aprovou (via `optional_host_permissions` por origem). Também executa um snippet pontual nesses contextos para o atalho “Abrir Escolher”. Não injecta em sites sem permissão concedida.
+
+**EN:** Registers the optional field-helper content script only on user-approved hosts (per-origin optional permissions). Runs short scripting for the optional “open picker” shortcut in those contexts. Does not inject on sites without permission.
+
+### storage
+
+**PT:** Armazena localmente a lista de sites permitidos, tema, opção de ligar/desligar o helper, regras opcionais de selector e dados de sessão de geradores (ex. export CSV). Nada é sincronizado com servidores pela extensão.
+
+**EN:** Stores locally the allowed-site list, theme, helper on/off, optional selector rules, and session-only generator data (e.g. CSV export). The extension does not sync this to our servers.
+
+### host_permissions (localhost / 127.0.0.1)
+
+**PT:** Ambiente de desenvolvimento local pré-autorizado para o helper e testes sem pedido extra ao utilizador base.
+
+**EN:** Pre-declared access to local development origins so developers can use the field helper on localhost without an extra step for the default install.
 
 ### optional_host_permissions (http/https)
 
-**Português:**  
-“O utilizador escolhe em que sites a extensão pode injectar o helper nos campos. A permissão é pedida **por origem** (ao clicar em ‘Adicionar este site’ ou ao guardar a lista nas opções). Não é pedido acesso a todos os sites automaticamente.”
+**PT:** O utilizador concede **cada origem** ao adicionar um site. A extensão **não** pede acesso global a todos os sites automaticamente; só aos domínios que o utilizador escolhe.
 
-**English:**  
-“Users choose which sites may run the optional in-page field helper. Host access is requested **per origin** when they add a site or save the list. The extension does not request blanket access to all websites without user action.”
+**EN:** Host access is granted **per origin** when the user adds a site. The extension does not request blanket access to all websites without user action.
 
-**English:**  
-“Used only for an invisible offscreen document with the `CLIPBOARD` reason when the browser cannot write to the clipboard directly from the service worker for global shortcuts. No UI is shown and no user data is collected.”
+## 5. Data safety (painel da loja) — orientação
 
-## 5. Finalidade única (Single purpose)
+Declare de forma coerente com [`PRIVACY.md`](../PRIVACY.md):
 
-**Sugestão (PT):**  
-“Gerar dados fictícios localmente (CPF, CNPJ, nome, GUID) para testes de formulários e copiá-los para a área de transferência.”
+- **User data collection:** a extensão **não** envia dados pessoais nem conteúdo de páginas para o programador; geração e heurísticas são **locais**.
+- Se perguntarem por dados no dispositivo: **definições e listas** em `chrome.storage.local` permanecem no dispositivo; o utilizador pode apagar ao desinstalar ou limpar dados da extensão.
+- **Não** venda de dados; **não** uso de dados para publicidade (a extensão não tem anúncios).
+- **Código remoto:** não aplicável — sem execução remota de código.
 
-## 6. Media na loja
+Se algo no questionário não coincidir com o seu pacote, ajuste o código **ou** a declaração; revisores verificam consistência.
 
-- **Ícone da loja:** 128×128 px (já existe em `public/assets/FakeDataEasy-128.png`).
-- **Capturas de ecrã:** normalmente **1280×800** ou **640×400** (PNG ou JPEG). Faça capturas do popup, das páginas de opções e, se quiser, da configuração de atalhos.
-- **Vídeo promocional:** opcional.
+## 6. Finalidade única (single purpose)
 
-## 7. Pacote ZIP
+**PT ( campo “single purpose”):** Gerar dados fictícios localmente para testes de formulários (CPF, CNPJ, CEP, nome, GUID, etc.) e copiá-los para a área de transferência ou preencher campos **opcionalmente**, só em sites que o utilizador autorizar.
 
-- O ficheiro `.zip` deve conter **no nível raiz** ficheiros como `manifest.json`, `background.js`, pastas `popup/`, `assets/`, etc. — **igual** à pasta `dist/` após `npm run build`.
-- **Não** incluir `src/`, `node_modules/`, nem `dist` como pasta única dentro do zip (erro comum: zip da pasta `dist` em vez dos *filhos* de `dist`).
+**EN:** Generate fake sample data locally for form testing (Brazilian IDs, CEP, names, GUIDs, etc.), copy to clipboard, and optionally fill fields only on user-allowed sites.
 
-O script `npm run zip` gera o arquivo com a estrutura correcta.
+## 7. Nota para o revisor (se existir o campo)
 
-## 8. Notas para re.submissão
+Sugestão curta **PT:**
 
-Se a extensão anterior foi removida por **Manifest V2** ou incompatibilidade, indique na **nota para o revisor** (se disponível) que esta versão é **Manifest V3**, com service worker e permissões mínimas justificadas.
+> MV3, service worker, sem código remoto. O helper injecta UI só em URLs da lista do utilizador (permissões de host opcionais por origem). Pode ser desligado nas opções. Atalhos globais só geram texto local e copiam para o clipboard (offscreen quando necessário). Ver `PRIVACY.md` no repositório.
+
+## 8. Media na loja
+
+- **Ícone:** 128×128 px (`public/assets/FakeDataEasy-128.png`).
+- **Capturas:** típico **1280×800** ou **640×400** — popup, opções de sites/tema/helper, exemplo do helper num formulário, export CSV se quiser destacar.
+- **Vídeo:** opcional.
+
+## 9. Pacote ZIP
+
+- O ZIP deve ter **`manifest.json` na raiz**, como o interior de `dist/` após `npm run build`.
+- **Não** empacotar `src/`, `node_modules/`, nem uma pasta única `dist/` por cima de tudo.
+
+O script `npm run zip` gera a estrutura correcta.
+
+## 10. Documentação oficial
+
+[Chrome Web Store — Developer Program Policies](https://developer.chrome.com/docs/webstore/program-policies) e [Prepare your extension](https://developer.chrome.com/docs/webstore/prepare).
 
 ---
 
-Consulte sempre a [documentação oficial da Chrome Web Store](https://developer.chrome.com/docs/webstore) para requisitos actualizados.
+*Actualize a versão e este guia quando o `manifest` ou as permissões mudarem.*

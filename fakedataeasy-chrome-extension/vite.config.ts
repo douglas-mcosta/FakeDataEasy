@@ -19,6 +19,7 @@ export default defineConfig({
         cpf: resolve(__dirname, 'pages/cpf.html'),
         cnpj: resolve(__dirname, 'pages/cnpj.html'),
         nome: resolve(__dirname, 'pages/nome.html'),
+        cep: resolve(__dirname, 'pages/cep.html'),
         offscreen: resolve(__dirname, 'offscreen/offscreen.html'),
         background: resolve(__dirname, 'src/background/service-worker.ts'),
       },

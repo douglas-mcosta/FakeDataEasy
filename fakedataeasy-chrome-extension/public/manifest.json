@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Fake Data Easy",
-  "version": "2.2.0",
-  "description": "Gera CPF, CNPJ, nomes e GUID para testar formulários. Atalhos globais (Ctrl+Shift+1–4). Helper opcional em campos nos sites que configurar. Não envia dados para a rede.",
+  "version": "2.3.0",
+  "description": "Gera dados fictícios localmente (CPF, CNPJ, CEP, nome, GUID) para testar formulários. Atalhos Ctrl+Shift+1–4. Helper opcional só em sites que você autorizar; pode desligar nas opções. Sem anúncios, sem telemetria, sem envio de dados para a rede.",
   "minimum_chrome_version": "109",
   "action": {
     "default_popup": "popup/index.html",
@@ -51,6 +51,10 @@
         "mac": "Command+Shift+4"
       },
       "description": "Gerar e copiar GUID",
+      "global": true
+    },
+    "abrir-menu-escolher": {
+      "description": "Abrir menu Escolher no campo focado (helper). Atribua tecla em Atalhos da extensão.",
       "global": true
     }
   },

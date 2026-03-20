@@ -17,7 +17,7 @@ Abre ao clicar no ícone da extensão (`browser_action` → `index.html`).
 
 | Elemento | Comportamento |
 |----------|----------------|
-| **Logotipo** | Imagem de marca (`FakeDataEasy2.png`) no topo. |
+| **Logotipo** | Marca no popup: ícone vetorial + título (antigo `FakeDataEasy2.png` substituído por `logo-icon.svg`). |
 | **Tabela “Opções”** | Quatro linhas: CPF, CNPJ, Nome, GUID. |
 | **Atalhos exibidos** | Cada linha mostra o atalho padrão ao lado do rótulo (ver secção de comandos). |
 | **Botão copiar (clipboard)** | Gera o dado correspondente, copia para o clipboard e exibe o valor gerado com ícone de confirmação por **~2 segundos** (depois o texto some). |

@@ -39,7 +39,8 @@ npm run dev
 - **Os atalhos globais (Ctrl+Shift+1–4) funcionam em qualquer sítio ou aplicação** onde o Chrome os aceite: **não** dependem da lista de sites. Copiam para a área de transferência sem injectar nada na página.
 - **A barra Auto / Escolher** junto aos campos só aparece nas **origens que estiverem na tua lista** (por defeito `localhost` e `127.0.0.1`). Isto limita o content script aos sites onde autorizaste a extensão.
 - Ao focar um `<input>` / `<textarea>` compatível: **Auto** (raio + texto; heurística “parece e-mail”, CPF, CNPJ, telefone BR, data ISO, URL, nome, GUID…) e **Escolher** (lista + texto; menu manual). Se o campo for ambíguo, aparece uma dica a amarelo a sugerir **Escolher**.
-- No **popup**: **Site actual** → **Adicionar este site** ou **Gerir lista…**; **⚙ Configurações** ou **Gerir lista** abrem a página de configurações **num novo separador** (sites + tema). As setas **→** levam ao ecrã do gerador **no próprio popup** (navegação interna).
+- No **popup**: **Site actual** → **Adicionar este site** ou **Gerir lista…**; **⚙ Configurações** ou **Gerir lista** abrem a página de configurações **num novo separador** (sites + tema). As setas **→** levam ao ecrã do gerador **no próprio popup** (navegação interna). **CEP** no menu (8 dígitos no 📋; página **→** com CEPs reais exemplo por região).
+- **Exportar CSV** nas páginas CPF, CNPJ, Nome e CEP: histórico da **sessão** (valores gerados com «↻ Gerar»), UTF-8 com BOM.
 - **Tema**: em **Configurações** → **Aparência**, escolhe **Automático** (segue o sistema), **Claro** ou **Escuro**. Popup, configurações e páginas de geradores partilham a mesma preferência (`chrome.storage.local`).
 
 ## Atalhos globais
@@ -64,6 +65,11 @@ As regras oficiais do Chrome **não mudaram** em traços gerais: atalhos **globa
 - **`offscreen`** — clipboard fiável a partir dos **atalhos** globais (MV3).
 - **`tabs`** — abrir a página de **configurações** num separador a partir do botão no popup (`chrome.tabs.create` para `options/options.html`).
 
+## Marca e ícones
+
+- **Fonte do ícone:** `public/assets/logo-icon.svg` (gradiente teal → azul → índigo, linhas “formulário”, selo âmbar “+”).
+- **PNG da barra e da loja:** gerados automaticamente no build (`FakeDataEasy-{16,32,48,128}.png`). Para regenerar só os PNG após editar o SVG: `npm run icons` (usa **sharp**; mantenha o SVG em UTF-8 **sem** comentários com caracteres que corrompam o ficheiro).
+
 ## Estrutura
 
 ```
@@ -72,13 +78,13 @@ pages/          — opções CPF / CNPJ / Nome
 offscreen/      — fallback de clipboard (MV3)
 src/background/ — service worker + comandos
 src/lib/        — geradores e utilitários
-public/         — manifest + ícones (copiados para dist/)
+public/         — manifest + ícones SVG/PNG (copiados para dist/)
 ```
 
 ## Chrome Web Store
 
-- Guia completo: [`docs/CHROME_WEB_STORE.md`](docs/CHROME_WEB_STORE.md) (checklist, política de privacidade, justificativas das permissões).
-- Política de privacidade (publique num URL HTTPS, p.ex. raw do GitHub): [`PRIVACY.md`](PRIVACY.md).
+- Guia completo: [`docs/CHROME_WEB_STORE.md`](docs/CHROME_WEB_STORE.md) — checklist, **Data safety**, justificativas **activeTab / scripting / storage**, texto para revisor, URLs `raw.githubusercontent.com` vs página no GitHub.
+- Política de privacidade: [`PRIVACY.md`](PRIVACY.md) (o painel da loja deve usar o **mesmo** URL HTTPS que declarar; o popup/opções ligam à vista no GitHub).
 
 Gerar o **ZIP** de submissão (faz build e cria `fake-data-easy-chrome-<versão>.zip` na raiz desta pasta):
 

@@ -1,6 +1,7 @@
 import { copyToClipboard } from '../src/lib/clipboard';
 import { CNPJ } from '../src/lib/cnpj';
 import { formatCnpjDigits } from '../src/lib/format-br';
+import { clearHistory, downloadCsv, getHistory, recordGenerated } from '../src/lib/generation-history';
 import { onlyNumbers } from '../src/lib/string-utils';
 import { initThemeOnPage } from '../src/lib/theme';
 
@@ -44,8 +45,22 @@ input.addEventListener('input', () => {
 
 btnGerar.addEventListener('click', async () => {
   const raw = CNPJ.gerarSemPontos();
+  recordGenerated('cnpj', raw);
   await copyToClipboard(raw);
   applyCnpjDisplay(raw);
 });
 
 applyCnpjDisplay('');
+
+document.getElementById('cnpj-export')?.addEventListener('click', () => {
+  const rows = getHistory('cnpj');
+  if (rows.length === 0) {
+    window.alert('Gere pelo menos um CNPJ com «↻ Gerar» antes de exportar.');
+    return;
+  }
+  downloadCsv('fake-data-easy-cnpj.csv', 'cnpj', rows);
+});
+
+document.getElementById('cnpj-clear-hist')?.addEventListener('click', () => {
+  clearHistory('cnpj');
+});

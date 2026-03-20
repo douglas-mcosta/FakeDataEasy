@@ -1,3 +1,4 @@
+import { getFieldHelperEnabled } from '../lib/storage-field-helper';
 import { getAllowedPatterns } from '../lib/storage-sites';
 
 export const FIELD_HELPER_SCRIPT_ID = 'fde-field-helper';
@@ -25,6 +26,7 @@ function isDuplicateScriptIdError(e: unknown): boolean {
 }
 
 async function runResyncFieldHelperScripts(): Promise<void> {
+  const enabled = await getFieldHelperEnabled();
   const raw = await getAllowedPatterns();
   const patterns = await patternsWithPermission(raw);
 
@@ -38,7 +40,7 @@ async function runResyncFieldHelperScripts(): Promise<void> {
   }
   const exists = registered.some((s) => s.id === FIELD_HELPER_SCRIPT_ID);
 
-  if (patterns.length === 0) {
+  if (!enabled || patterns.length === 0) {
     if (exists) {
       await chrome.scripting.unregisterContentScripts({ ids: [FIELD_HELPER_SCRIPT_ID] });
     }
@@ -50,6 +52,7 @@ async function runResyncFieldHelperScripts(): Promise<void> {
     matches: patterns,
     js: ['content/field-helper.js'],
     runAt: 'document_idle',
+    allFrames: true,
   };
 
   if (exists) {

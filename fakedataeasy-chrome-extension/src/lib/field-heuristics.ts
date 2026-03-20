@@ -7,7 +7,8 @@ import { CPF } from './cpf';
 import { gerarDataIsoAleatoria } from './data-fake';
 import { gerarEmailFake } from './email';
 import { gerarGuid } from './guid';
-import { gerarNome } from './nome';
+import { gerarCep } from './cep';
+import { gerarNome, gerarNomeCompleto } from './nome';
 import { gerarTelefoneCelularBR } from './telefone-br';
 import { onlyNumbers } from './string-utils';
 
@@ -78,6 +79,21 @@ export function inferAutoForField(el: HTMLInputElement | HTMLTextAreaElement): I
     return { value: gerarTelefoneCelularBR(), ambiguous: false, kindLabel: 'Telefone' };
   }
 
+  // CEP
+  if (
+    hit('cep', 'codigo-postal', 'codigo_postal', 'postal') ||
+    ac === 'postal-code' ||
+    maxLen === 8 ||
+    maxLen === 9
+  ) {
+    const comHifen = maxLen !== 8;
+    return {
+      value: gerarCep('qualquer', comHifen),
+      ambiguous: false,
+      kindLabel: 'CEP',
+    };
+  }
+
   // Data
   if (
     type === 'date' ||
@@ -97,9 +113,18 @@ export function inferAutoForField(el: HTMLInputElement | HTMLTextAreaElement): I
     };
   }
 
+  // Nome completo (palavras-chave explícitas)
+  if (hit('nome_completo', 'nome-completo', 'fullname', 'full_name', 'nomecompleto')) {
+    return {
+      value: gerarNomeCompleto(Math.random() < 0.5),
+      ambiguous: false,
+      kindLabel: 'Nome completo',
+    };
+  }
+
   // Nome
   if (
-    hit('nome', 'name', 'sobrenome', 'apelido', 'fullname', 'responsavel', 'responsável', 'fantasia') ||
+    hit('nome', 'name', 'sobrenome', 'apelido', 'responsavel', 'responsável', 'fantasia') ||
     ac.includes('name') ||
     ac === 'given-name' ||
     ac === 'family-name' ||

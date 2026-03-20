@@ -9,7 +9,7 @@
   <body>
     <div class="shell page-options">
       <div class="logo-wrap">
-        <img class="logo" src="../assets/FakeDataEasy2.png" alt="" width="160" height="auto" />
+        <img class="logo" src="../assets/logo-icon.svg" alt="" width="44" height="44" />
       </div>
 
       <form id="nome-form" class="options-form">
@@ -29,10 +29,23 @@
           </label>
         </div>
 
+        <div class="radio-row">
+          <label>
+            <input type="radio" name="nomeTipo" value="primeiro" checked />
+            Primeiro nome
+          </label>
+          <label>
+            <input type="radio" name="nomeTipo" value="completo" />
+            Nome completo
+          </label>
+        </div>
+
         <div class="page-actions">
           <a class="btn-back" href="../popup/index.html" title="Menu">←</a>
-          <button type="button" class="btn-soon" disabled>Exportar lista (Em breve)</button>
+          <button type="button" id="nome-export" class="btn-export">Exportar CSV</button>
         </div>
+        <button type="button" id="nome-clear-hist" class="btn-link-quiet">Limpar histórico (sessão)</button>
+        <p class="export-hint">«Nome completo» = nome + um ou dois sobrenomes. Só valores de «↻ Gerar» entram na lista.</p>
       </form>
     </div>
     <script type="module" src="./nome.ts"></script>

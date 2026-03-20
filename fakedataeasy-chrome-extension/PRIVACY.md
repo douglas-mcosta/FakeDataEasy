@@ -2,54 +2,65 @@
 
 **Última atualização:** março de 2026  
 
-**Extensão:** Fake Data Easy (Manifest V3, Chrome / Chromium)
+**Extensão:** Fake Data Easy (Manifest V3, Google Chrome / Chromium)
 
 ## Resumo
 
-A extensão **Fake Data Easy** gera dados fictícios (CPF, CNPJ, nome, GUID) **localmente no seu dispositivo** para apoio a testes de formulários. **Não recolhe, armazena nem transmite** informações pessoais ou de utilização para servidores do autor ou de terceiros.
+A extensão **Fake Data Easy** gera dados fictícios (CPF, CNPJ, CEP, nome, GUID, telefone, datas de exemplo, etc.) **só no seu dispositivo**, para apoiar testes de formulários e desenvolvimento. **Não recolhe dados para servidores do autor nem de terceiros**, não vende informações, não integra publicidade nem ferramentas de análise (analytics) na extensão.
 
 ## Dados e rede
 
-- **Não há contas, início de sessão nem análises** integradas na extensão.
-- **Não são feitos pedidos HTTP** pela extensão para enviar os dados gerados ou o que escreve na área de transferência.
-- Os únicos dados tratados são **strings geradas no próprio browser** e o texto **explicitamente copiado** para a área de transferência **quando você usa** os botões da extensão ou os **atalhos de teclado** configurados.
+- **Não há contas, início de sessão nem telemetria** integradas na extensão.
+- **Não são feitos pedidos HTTP pela extensão** para enviar valores gerados, texto da área de transferência ou conteúdo de páginas web.
+- Os únicos dados produzidos são **strings geradas localmente** e o texto **que você copia explicitamente** ao usar botões, páginas de geradores ou **atalhos de teclado** (o mesmo fluxo de “gerar e copiar”).
+- **Código da extensão** executa a partir do pacote instalado; **não** há carregamento remoto de scripts (sem “remote code”).
 
-## Permissões (Chrome)
+## Permissões (Chrome) e finalidade
 
-| Permissão        | Utilização |
-|------------------|------------|
-| **clipboardWrite** | Escrever na área de transferência **apenas** o valor que acabou de ser gerado, para poder colar noutra aplicação (por exemplo num campo de formulário ou no Bloco de notas). |
-| **offscreen**      | Criar um documento invisível **só quando necessário** como método alternativo de acesso à API de clipboard em segundo plano (atalhos globais), quando o ambiente não permite escrever no clipboard diretamente a partir do service worker. |
-| **tabs**           | Abrir **um separador** com a página de configurações da extensão quando o utilizador clica em **Configurações** ou **Gerir lista** no popup. **Não** é usada para ler o conteúdo dos separadores nem para injectar código em páginas Web por esta API. |
+| Permissão | Para que serve |
+|-----------|----------------|
+| **activeTab** | Quando usa **Adicionar este site** no popup, a extensão lê o **URL do separador activo** para propor o padrão de origem. Também permite, **após um gesto seu** (atalho global opcional “Abrir Escolher”), usar a API de scripting **só na página em que está** para abrir o menu do helper. **Não** é usada para seguir a sua navegação em segundo plano. |
+| **scripting** | Regista o **content script** do helper apenas nos **hosts que você aprovou** na lista (com `optional_host_permissions`). Usa **programmatic injection** / registo limitado a esses URLs — não injecta em “toda a Internet” sem permissão explícita por origem. |
+| **storage** | Guarda **localmente** (`chrome.storage.local`): lista de padrões de sites, preferência de tema, **ligar/desligar o helper**, **regras opcionais** (URL + selector + tipo de dado para o botão Auto) e, se aplicável, dados de UI da sessão (ex.: histórico de valores gerados só para exportar CSV). **Nada disto é enviado pela extensão para a rede.** |
+| **clipboardWrite** | Escreve na área de transferência **apenas** o valor que acabou de ser gerado por si, para poder colar noutro campo ou aplicação. |
+| **offscreen** | Cria um documento invisível **só quando necessário** (`reason: CLIPBOARD`), para copiar de forma fiável a partir do **service worker** quando usa **atalhos globais** nos sistemas em que o Chrome não permite `navigator.clipboard` directamente no worker. |
+| **tabs** | Usada para **abrir um separador** com a página **Opções** da extensão quando clica em **Configurar** / **Gerir lista** (equivalente a `chrome.runtime.openOptionsPage` com `options_ui.open_in_tab`). **Não** é usada para ler o conteúdo dos sites que visita. |
 
-## Cookies e armazenamento local
+### Permissões de host (sites)
 
-A extensão **não utiliza cookies** para fins de rastreio. Usa **`chrome.storage.local`** só para definições de produto: a **lista de padrões de URL** onde o helper nos campos pode injectar, e a **preferência de tema** (claro / escuro / automático). Estes dados **não saem do dispositivo** por intermédio da extensão.
+| Tipo | Finalidade |
+|------|------------|
+| **host_permissions** (`localhost`, `127.0.0.1`) | Permitir o helper e o fluxo “Adicionar site” em **ambiente de desenvolvimento local** sem passo extra para o utilizador base. |
+| **optional_host_permissions** (`http://*/*`, `https://*/*`) | Concedidas **só quando você adiciona** cada site (popup ou opções) e aceita o pedido do Chrome. Sem isto, a extensão **não** injecta UI em domínios que não estejam aprovados. |
 
-## Script nas páginas que configurar
+## Helper nos campos (content script)
 
-Se activar sites na lista (por defeito só desenvolvimento local), a extensão pode injectar um **content script** nesses URLs **apenas** para mostrar botões junto de campos de formulário e preenchê-los com dados que **gere localmente**. Não envolve envio desses dados para servidores do autor; o funcionamento é análogo ao popup, sem telemetria.
+- Só corre nas **origens que estão na sua lista** e quando o **helper não está desligado** nas opções.
+- Mostra controlos locais (Auto / Escolher) e pode **ler atributos e etiquetas do campo** (nome, id, tipo, etc.) **só no browser** para **heurísticas** e para aplicar **regras que você definiu** (selector + tipo). Essa informação **não é transmitida** para servidores externos pela extensão.
+- **Pode desligar totalmente** o inject do helper nas **Configurações** (“Helper nos campos”); nesse caso continuam a funcionar o popup e os atalhos que só copiam dados gerados.
 
-## Terceiros
+## Cookies e armazenamento
 
-As **bibliotecas** incluídas no pacote da extensão (por exemplo geração e validação de documentos brasileiros, geração de nomes) executam **localmente**. Não há SDKs de publicidade nem de análise ligados a serviços externos pela extensão.
+A extensão **não utiliza cookies** para rastreio. Usa apenas **`chrome.storage.local`** conforme descrito acima. Os dados permanecem no perfil do Chrome até os apagar ou desinstalar a extensão.
+
+## Terceiros e bibliotecas
+
+As dependências empacotadas (ex.: geração/validação de documentos brasileiros, nomes) executam **localmente** no pacote da extensão. Não há SDKs de anúncios nem de analytics ligados afora pelo código da extensão.
 
 ## Links externos na interface
 
-O popup pode incluir **hiperligações** (por exemplo redes sociais do autor) que abrem no browser **como qualquer outro site**. Essa navegação está sujeita à política desse site, não à presente extensão.
+O popup pode conter **hiperligações** (redes sociais, GitHub, política de privacidade) que abrem no browser como qualquer outro site. Essa navegação fica sujeita à política desse site.
 
 ## Menores
 
-A extensão não se dirige especificamente a menores; o seu uso destina-se sobretudo a **desenvolvedores e testadores de software**.
+A extensão não se dirige a menores; o uso previsto é de **desenvolvedores, QA e equipas técnicas**.
 
 ## Alterações
 
-Esta política pode ser atualizada quando a funcionalidade da extensão mudar. A versão em vigor estará disponível no mesmo local onde consultou este documento (por exemplo repositório público do projeto).
+Esta política pode ser actualizada quando a funcionalidade mudar. A versão em vigor está no repositório público do projeto (ficheiro `PRIVACY.md`).
 
 ## Contacto
 
-Para questões sobre privacidade relacionadas com esta extensão, utilize os contactos indicados na página da extensão na Chrome Web Store ou no repositório do projeto (por exemplo issues no GitHub do proprietário).
-
----
-
-*Este texto é fornecido como modelo informativo; adapte o bloco “Contacto” com o seu e-mail ou URL oficiais antes de publicar.*
+Questões sobre privacidade desta extensão: abra um tópico em **GitHub** em  
+[github.com/douglas-mcosta/FakeDataEasy/issues](https://github.com/douglas-mcosta/FakeDataEasy/issues)  
+ou use o contacto indicado na ficha da extensão na **Chrome Web Store**.

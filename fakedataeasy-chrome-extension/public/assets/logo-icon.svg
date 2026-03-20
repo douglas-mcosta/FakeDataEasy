@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="fde-logo-title">
+  <title id="fde-logo-title">Fake Data Easy</title>
+  <defs>
+    <linearGradient id="fde-g" x1="64" y1="32" x2="448" y2="480" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0d9488"/>
+      <stop offset="0.55" stop-color="#0ea5e9"/>
+      <stop offset="1" stop-color="#4f46e5"/>
+    </linearGradient>
+    <linearGradient id="fde-highlight" x1="256" y1="48" x2="400" y2="200" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="108" fill="url(#fde-g)"/>
+  <ellipse cx="280" cy="120" rx="220" ry="100" fill="url(#fde-highlight)"/>
+  <rect x="84" y="150" width="244" height="46" rx="23" fill="#f8fafc"/>
+  <rect x="84" y="228" width="190" height="46" rx="23" fill="#f8fafc" opacity="0.9"/>
+  <rect x="84" y="306" width="224" height="46" rx="23" fill="#f8fafc" opacity="0.82"/>
+  <circle cx="402" cy="134" r="34" fill="#fbbf24"/>
+  <path
+    fill="none"
+    stroke="#78350f"
+    stroke-width="10"
+    stroke-linecap="round"
+    d="M402 118v32M386 134h32"
+  />
+</svg>

@@ -1,4 +1,14 @@
 import { DEFAULT_SITE_PATTERNS, normalizeManualPattern } from '../src/lib/site-patterns';
+import {
+  getFieldHelperEnabled,
+  getSelectorOverrides,
+  OVERRIDE_KIND_LABELS,
+  OVERRIDE_KIND_OPTIONS,
+  setFieldHelperEnabled,
+  setSelectorOverrides,
+  type OverrideKind,
+  type SelectorOverrideRule,
+} from '../src/lib/storage-field-helper';
 import { getAllowedPatterns, setAllowedPatterns } from '../src/lib/storage-sites';
 import {
   getThemePreference,
@@ -39,6 +49,102 @@ chrome.storage.onChanged.addListener((changes, area) => {
 const listEl = document.getElementById('site-list') as HTMLUListElement;
 const manual = document.getElementById('manual-sites') as HTMLTextAreaElement;
 const status = document.getElementById('status') as HTMLParagraphElement;
+
+const fieldHelperCb = document.getElementById('field-helper-enabled') as HTMLInputElement;
+const overrideListEl = document.getElementById('override-list') as HTMLUListElement;
+const overridePatternEl = document.getElementById('override-pattern') as HTMLInputElement;
+const overrideSelectorEl = document.getElementById('override-selector') as HTMLInputElement;
+const overrideKindEl = document.getElementById('override-kind') as HTMLSelectElement;
+
+for (const k of OVERRIDE_KIND_OPTIONS) {
+  const o = document.createElement('option');
+  o.value = k;
+  o.textContent = OVERRIDE_KIND_LABELS[k];
+  overrideKindEl.appendChild(o);
+}
+
+function selectorIsValidInPage(sel: string): boolean {
+  try {
+    document.querySelector(sel);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function initFieldHelperToggle(): Promise<void> {
+  fieldHelperCb.checked = await getFieldHelperEnabled();
+  fieldHelperCb.addEventListener('change', async () => {
+    await setFieldHelperEnabled(fieldHelperCb.checked);
+    setStatus(
+      fieldHelperCb.checked
+        ? 'Helper nos campos ligado. Recarregue páginas abertas se precisar.'
+        : 'Helper nos campos desligado.',
+    );
+  });
+}
+
+async function renderOverrides(): Promise<void> {
+  const rules = await getSelectorOverrides();
+  overrideListEl.innerHTML = '';
+  for (let i = 0; i < rules.length; i++) {
+    const rule = rules[i];
+    const li = document.createElement('li');
+    const span = document.createElement('span');
+    span.className = 'override-desc';
+    const c1 = document.createElement('code');
+    c1.textContent = rule.pattern;
+    const mid = document.createTextNode(' · ');
+    const c2 = document.createElement('code');
+    c2.textContent = rule.selector;
+    const tail = document.createTextNode(` → ${OVERRIDE_KIND_LABELS[rule.kind]}`);
+    span.append(c1, mid, c2, tail);
+    const rm = document.createElement('button');
+    rm.type = 'button';
+    rm.textContent = 'Remover';
+    rm.addEventListener('click', async () => {
+      const cur = await getSelectorOverrides();
+      const next = cur.filter((_, j) => j !== i);
+      await setSelectorOverrides(next);
+      await renderOverrides();
+      setStatus('Regra removida.');
+    });
+    li.appendChild(span);
+    li.appendChild(rm);
+    overrideListEl.appendChild(li);
+  }
+}
+
+document.getElementById('btn-add-override')?.addEventListener('click', async () => {
+  const pattern = overridePatternEl.value.trim();
+  const selector = overrideSelectorEl.value.trim();
+  const kind = overrideKindEl.value as OverrideKind;
+  if (!pattern || !pattern.includes('://')) {
+    setStatus('Use um padrão com protocolo (ex.: https://site.com/*).', true);
+    return;
+  }
+  if (!selector) {
+    setStatus('Indique o selector CSS.', true);
+    return;
+  }
+  if (!selectorIsValidInPage(selector)) {
+    setStatus('Selector CSS inválido (erro de sintaxe).', true);
+    return;
+  }
+  if (!OVERRIDE_KIND_OPTIONS.includes(kind)) {
+    setStatus('Tipo inválido.', true);
+    return;
+  }
+  const cur = await getSelectorOverrides();
+  await setSelectorOverrides([...cur, { pattern, selector, kind }]);
+  overridePatternEl.value = '';
+  overrideSelectorEl.value = '';
+  await renderOverrides();
+  setStatus('Regra adicionada.');
+});
+
+void initFieldHelperToggle();
+void renderOverrides();
 
 function setStatus(msg: string, err = false): void {
   status.textContent = msg;
