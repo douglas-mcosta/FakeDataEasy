@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fake Data Easy</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="shell menu">
+      <div class="logo-wrap">
+        <img class="logo" src="/assets/FakeDataEasy2.png" alt="Fake Data Easy" width="180" height="auto" />
+      </div>
+
+      <div class="section-title"><span class="section-icon">⚙</span> Opções</div>
+
+      <table class="menu-table">
+        <tbody>
+          <tr data-kind="cpf">
+            <td class="cell-label">
+              Gerar CPF <small class="shortcut">(Ctrl+Shift+1)</small>
+              <div class="preview" hidden></div>
+            </td>
+            <td class="cell-actions">
+              <button type="button" class="btn-icon btn-copy" title="Gerar e copiar" aria-label="Gerar e copiar CPF">📋</button>
+            </td>
+            <td class="cell-actions">
+              <a class="btn-icon btn-link" href="../pages/cpf.html" title="Opções" aria-label="Opções CPF">→</a>
+            </td>
+          </tr>
+          <tr data-kind="cnpj">
+            <td class="cell-label">
+              Gerar CNPJ <small class="shortcut">(Ctrl+Shift+2)</small>
+              <div class="preview" hidden></div>
+            </td>
+            <td class="cell-actions">
+              <button type="button" class="btn-icon btn-copy" title="Gerar e copiar" aria-label="Gerar e copiar CNPJ">📋</button>
+            </td>
+            <td class="cell-actions">
+              <a class="btn-icon btn-link" href="../pages/cnpj.html" title="Opções" aria-label="Opções CNPJ">→</a>
+            </td>
+          </tr>
+          <tr data-kind="nome">
+            <td class="cell-label">
+              Gerar Nome <small class="shortcut">(Ctrl+Shift+3)</small>
+              <div class="preview" hidden></div>
+            </td>
+            <td class="cell-actions">
+              <button type="button" class="btn-icon btn-copy" title="Gerar e copiar" aria-label="Gerar e copiar nome">📋</button>
+            </td>
+            <td class="cell-actions">
+              <a class="btn-icon btn-link" href="../pages/nome.html" title="Opções" aria-label="Opções nome">→</a>
+            </td>
+          </tr>
+          <tr data-kind="guid">
+            <td class="cell-label">
+              Gerar Guid <small class="shortcut">(Ctrl+Shift+4)</small>
+              <div class="preview preview--wide" hidden></div>
+            </td>
+            <td class="cell-actions">
+              <button type="button" class="btn-icon btn-copy" title="Gerar e copiar" aria-label="Gerar e copiar GUID">📋</button>
+            </td>
+            <td class="cell-actions"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <footer class="footer">
+        <small>Desenvolvido por Douglas M. Costa</small>
+        <p class="footer-links">
+          <a href="https://www.linkedin.com/in/douglas-mcosta" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <span class="sep">|</span>
+          <a href="https://github.com/douglas-mcosta" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </p>
+      </footer>
+    </div>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

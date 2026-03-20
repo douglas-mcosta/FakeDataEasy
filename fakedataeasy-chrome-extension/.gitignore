@@ -43,3 +43,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Pacote para a Chrome Web Store (gerado por npm run zip)
+/fake-data-easy-chrome-*.zip

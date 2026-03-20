@@ -1,0 +1,289 @@
+:root {
+  font-family: system-ui, Segoe UI, Roboto, sans-serif;
+  font-size: 14px;
+  color: #e8eaed;
+  background: #202124;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 300px;
+  max-width: 380px;
+}
+
+.shell {
+  padding: 10px 12px 12px;
+}
+
+.logo-wrap {
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.logo {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+.section-title {
+  background: #1a73e8;
+  color: #fff;
+  text-align: center;
+  font-weight: 600;
+  padding: 6px 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.section-icon {
+  margin-right: 4px;
+}
+
+.menu-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: #2d2d30;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.menu-table tr {
+  border-bottom: 1px solid #3c4043;
+}
+
+.menu-table tr:last-child {
+  border-bottom: none;
+}
+
+.menu-table td {
+  padding: 8px 6px;
+  vertical-align: middle;
+}
+
+.cell-label {
+  width: 100%;
+}
+
+.cell-label small.shortcut {
+  display: block;
+  font-size: 10px;
+  color: #9aa0a6;
+  margin-top: 2px;
+}
+
+.preview {
+  font-size: 11px;
+  color: #81c995;
+  margin-top: 4px;
+  word-break: break-all;
+  max-width: 220px;
+}
+
+.preview--wide {
+  max-width: 280px;
+}
+
+.cell-actions {
+  white-space: nowrap;
+  width: 1%;
+}
+
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  min-height: 28px;
+  padding: 2px 8px;
+  border: 1px solid #5f6368;
+  border-radius: 4px;
+  background: transparent;
+  color: #e8eaed;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.btn-icon:hover {
+  background: #3c4043;
+}
+
+.btn-link {
+  color: #8ab4f8;
+}
+
+.footer {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid #3c4043;
+  text-align: center;
+  color: #9aa0a6;
+  font-size: 11px;
+}
+
+.footer-links {
+  margin: 6px 0 0;
+}
+
+.footer-links a {
+  color: #8ab4f8;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.sep {
+  margin: 0 6px;
+  color: #5f6368;
+}
+
+/* ——— Páginas de opções (CPF / CNPJ / Nome) ——— */
+
+.page-options .logo-wrap {
+  margin-bottom: 10px;
+}
+
+.options-form {
+  margin-top: 8px;
+}
+
+.field-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+  align-items: stretch;
+}
+
+.field-row input[type='text'] {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid #5f6368;
+  border-radius: 4px;
+  background: #303134;
+  color: #e8eaed;
+  font-size: 14px;
+}
+
+.field-row input[type='text']:focus {
+  outline: 2px solid #1a73e8;
+  outline-offset: 0;
+}
+
+.field-row input.valid {
+  border-color: #81c995;
+}
+
+.field-row input.invalid {
+  border-color: #f28b82;
+}
+
+.btn-gerar {
+  padding: 8px 12px;
+  border: 1px solid #1a73e8;
+  border-radius: 4px;
+  background: rgba(26, 115, 232, 0.2);
+  color: #8ab4f8;
+  cursor: pointer;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.btn-gerar:hover {
+  background: rgba(26, 115, 232, 0.35);
+}
+
+.radio-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.radio-row label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.valid-msg {
+  font-size: 12px;
+  margin: 0 0 10px;
+  padding: 6px 8px;
+  border-radius: 4px;
+}
+
+.valid-msg.ok {
+  background: rgba(129, 201, 149, 0.15);
+  color: #81c995;
+}
+
+.valid-msg.bad {
+  background: rgba(242, 139, 130, 0.15);
+  color: #f28b82;
+}
+
+.page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 32px;
+  border: 1px solid #5f6368;
+  border-radius: 4px;
+  color: #e8eaed;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.btn-back:hover {
+  background: #3c4043;
+}
+
+.btn-soon {
+  padding: 6px 10px;
+  border: 1px solid #5f6368;
+  border-radius: 4px;
+  background: #3c4043;
+  color: #9aa0a6;
+  font-size: 12px;
+  cursor: not-allowed;
+}
+
+.btn-validar {
+  width: 100%;
+  margin-top: 4px;
+  padding: 8px;
+  border: 1px solid #5f6368;
+  border-radius: 4px;
+  background: #303134;
+  color: #e8eaed;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.btn-validar:hover {
+  background: #3c4043;
+}

@@ -1,58 +1,24 @@
-# Fake Data Easy Chrome Extension
-## Visão Geral
-O intuito dessa extensão é facilitar o preenchimento de formulários por desenvolvedores. Já que, geralmente temos que preencher os mesmos formulários para teste por diversas vezes.
-Essa extensão disponibiliza atalhos que geram os dados CPF, CNPJ, Nome e Guid na área de transferência, bastando apenas pressionar o atalho do dado que deseja gerar + CTRL + V no campo escolhido.
-A ideia é que na próxima versão sejam adicionados mais atalhos com dados usuais como nome de usuário, e-mail, entre outros.
+# Fake Data Easy
 
-![fake-data-easy2](https://user-images.githubusercontent.com/12072278/125501518-8a9d09ee-f20a-4513-87f2-ea6428a7b78f.gif)
+Extensão Chrome para gerar dados fictícios (CPF, CNPJ, nome, GUID) e facilitar testes de formulários.
 
-## Atalhos
+**Código e instruções de build:** veja [`fakedataeasy-chrome-extension/README.md`](fakedataeasy-chrome-extension/README.md).
 
-A maneira mais rápida e prática de gerar um dado válido através da extensão é através dos atalhos. A partir da execução deles é gerado instantaneamente o dado na área de transferência do sistema operacional, permitindo ao usuário colar em qualquer campo dentro ou fora do navegador. 
+A extensão foi reescrita com **Vite + TypeScript + Manifest V3** (sem Angular). Documentação de funcionalidades: [`fakedataeasy-chrome-extension/FEATURES.md`](fakedataeasy-chrome-extension/FEATURES.md).
 
-Lista de atalhos disponiveis no momento:
+---
 
-- CTRL + SHIFT + 1 - Gera um CPF
-- CTRL + SHIFT + 2 - Gera um CNPJ
-- CTRL + SHIFT + 3 - Gera um Nome 
-- CTRL + SHIFT + 4 - Gera um Guid
+## Atalhos (comportamento alvo)
 
-## Desenvolvedores
-O projeto está escrito em Angular 12.
+- **Ctrl+Shift+1** — CPF  
+- **Ctrl+Shift+2** — CNPJ  
+- **Ctrl+Shift+3** — Nome  
+- **Ctrl+Shift+4** — GUID  
 
-### Iniciar o projeto
-- ng s
+Os atalhos são tratados no **service worker** (copiam para a área de transferência).
 
-### Build do projeto
-- ng b
+## Chrome Web Store
 
-Quando executado o build do projeto é criado a pasta "Dist" com o código transpilado em Javascript. Esse código pode ser utilizado para adicionar a extensão no seu Google Chrome para realizar os testes necessários antes do PR
-![image](https://user-images.githubusercontent.com/12072278/125503405-a20deef5-38e9-4f37-96d5-371150593a54.png)
+<https://chrome.google.com/webstore/detail/fake-data-easy/nkdncmpmmhpdngfjbghlebjfncemheij?hl=pt-BR>
 
-### Adicionar um atalho
-
-- No arquivo manifest.json registre seu atalho 
-
-![image](https://user-images.githubusercontent.com/12072278/125504032-320c2b4d-e1ab-4793-92fa-67ad610bc9b7.png)
-
-- Em models > commandType-enum.ts registre seu atalho com o mesmo nome utilizado no manifest.js. Esse enum é utilzado para facilitar a leitura e utilização dos atalhos no código
-
-![image](https://user-images.githubusercontent.com/12072278/125504266-6ec4ad53-6546-467e-b7ca-ff13ba741d66.png)
-
-- Estamos utilizando um background service para capturar os atalhos quando precinados no teclado, adiciona a condição do seu atalho e qual função será executada 
-
-![image](https://user-images.githubusercontent.com/12072278/125504497-9bb904b7-d103-4514-8734-e2c57b804461.png)
-
-- Estamos organizando o projeto por modulo/feature conforme a imagem abaixo
-
-![image](https://user-images.githubusercontent.com/12072278/125511368-cdfc0b18-520c-4bcb-b39f-31002508fe96.png)
-
-
-## Extensão na Chrome Web Store
-
-https://chrome.google.com/webstore/detail/fake-data-easy/nkdncmpmmhpdngfjbghlebjfncemheij?hl=pt-BR
-
-## Material de Apoio
-
-https://medium.com/angular-in-depth/chrome-extension-with-angular-why-and-how-778200b87575
-
+**Publicar nova versão:** checklist, privacidade e ZIP — [`fakedataeasy-chrome-extension/docs/CHROME_WEB_STORE.md`](fakedataeasy-chrome-extension/docs/CHROME_WEB_STORE.md) e `npm run zip` dentro dessa pasta.

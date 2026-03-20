@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CPF — Fake Data Easy</title>
+    <link rel="stylesheet" href="../popup/styles.css" />
+  </head>
+  <body>
+    <div class="shell page-options">
+      <div class="logo-wrap">
+        <img class="logo" src="/assets/FakeDataEasy2.png" alt="" width="160" height="auto" />
+      </div>
+
+      <form id="cpf-form" class="options-form">
+        <div class="field-row">
+          <input id="cpf-input" type="text" inputmode="numeric" autocomplete="off" placeholder="CPF" maxlength="14" />
+          <button type="button" id="cpf-gerar" class="btn-gerar">↻ Gerar</button>
+        </div>
+
+        <div class="radio-row">
+          <label>
+            <input type="radio" name="cpfMask" value="1" />
+            Com pontos
+          </label>
+          <label>
+            <input type="radio" name="cpfMask" value="0" checked />
+            Sem pontos
+          </label>
+        </div>
+
+        <p id="cpf-valid-msg" class="valid-msg" hidden></p>
+
+        <button type="submit" class="btn-validar">Validar CPF</button>
+
+        <div class="page-actions">
+          <a class="btn-back" href="../popup/index.html" title="Menu">←</a>
+          <button type="button" class="btn-soon" disabled>Exportar lista (Em breve)</button>
+        </div>
+      </form>
+    </div>
+    <script type="module" src="./cpf.ts"></script>
+  </body>
+</html>

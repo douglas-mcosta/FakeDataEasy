@@ -1,0 +1,60 @@
+{
+  "manifest_version": 3,
+  "name": "Fake Data Easy",
+  "version": "2.1.0",
+  "description": "Gera CPF, CNPJ, nomes e GUID para testar formulários. Atalhos globais (teclas padrão Ctrl+Shift+1–4; altere em chrome://extensions → Atalhos). Não envia dados para a rede.",
+  "minimum_chrome_version": "109",
+  "action": {
+    "default_popup": "popup/index.html",
+    "default_title": "Fake Data Easy",
+    "default_icon": {
+      "16": "assets/FakeDataEasy-16.png",
+      "32": "assets/FakeDataEasy-32.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "commands": {
+    "gerar-cpf": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+1",
+        "mac": "Command+Shift+1"
+      },
+      "description": "Gerar e copiar CPF (só dígitos)",
+      "global": true
+    },
+    "gerar-cnpj": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+2",
+        "mac": "Command+Shift+2"
+      },
+      "description": "Gerar e copiar CNPJ (só dígitos)",
+      "global": true
+    },
+    "gerar-nome": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+3",
+        "mac": "Command+Shift+3"
+      },
+      "description": "Gerar e copiar nome (aleatório)",
+      "global": true
+    },
+    "gerar-guid": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+4",
+        "mac": "Command+Shift+4"
+      },
+      "description": "Gerar e copiar GUID",
+      "global": true
+    }
+  },
+  "icons": {
+    "16": "assets/FakeDataEasy-16.png",
+    "32": "assets/FakeDataEasy-32.png",
+    "48": "assets/FakeDataEasy-48.png",
+    "128": "assets/FakeDataEasy-128.png"
+  },
+  "permissions": ["clipboardWrite", "offscreen"]
+}

@@ -1,58 +1,76 @@
-# Fake Data Easy Chrome Extension
-## Visão Geral
-O intuito dessa extensão é facilitar o preenchimento de formulários por desenvolvedores. Já que, geralmente temos que preencher os mesmos formulários para teste por diversas vezes.
-Essa extensão disponibiliza atalhos que geram os dados CPF, CNPJ, Nome e Guid na área de transferência, bastando apenas pressionar o atalho do dado que deseja gerar + CTRL + V no campo escolhido.
-A ideia é que na próxima versão sejam adicionados mais atalhos com dados usuais como nome de usuário, e-mail, entre outros.
+# Fake Data Easy — extensão Chrome (MV3)
 
-![fake-data-easy2](https://user-images.githubusercontent.com/12072278/125501518-8a9d09ee-f20a-4513-87f2-ea6428a7b78f.gif)
+Geração de dados fictícios para testes de formulários. **Stack:** Vite 6, TypeScript, Manifest V3 (sem Angular).
 
-## Atalhos
+## Requisitos
 
-A maneira mais rápida e prática de gerar um dado válido através da extensão é através dos atalhos. A partir da execução deles é gerado instantaneamente o dado na área de transferência do sistema operacional, permitindo ao usuário colar em qualquer campo dentro ou fora do navegador. 
+- Node.js 18+
+- npm
 
-Lista de atalhos disponiveis no momento:
+## Comandos
 
-- CTRL + SHIFT + 1 - Gera um CPF
-- CTRL + SHIFT + 2 - Gera um CNPJ
-- CTRL + SHIFT + 3 - Gera um Nome 
-- CTRL + SHIFT + 4 - Gera um Guid
+```bash
+npm ci
+npm run build
+```
 
-## Desenvolvedores
-O projeto está escrito em Angular 12.
+Saída em **`dist/`**. Em desenvolvimento contínuo:
 
-### Iniciar o projeto
-- ng s
+```bash
+npm run dev
+```
 
-### Build do projeto
-- ng b
+(`vite build --watch` — volte a carregar a extensão no Chrome quando o build terminar.)
 
-Quando executado o build do projeto é criado a pasta "Dist" com o código transpilado em Javascript. Esse código pode ser utilizado para adicionar a extensão no seu Google Chrome para realizar os testes necessários antes do PR
-![image](https://user-images.githubusercontent.com/12072278/125503405-a20deef5-38e9-4f37-96d5-371150593a54.png)
+## Carregar no Chrome
 
-### Adicionar um atalho
+1. Abra `chrome://extensions`
+2. Ative **Modo do programador**
+3. **Carregar sem compactação** → escolha a pasta **`dist`**
 
-- No arquivo manifest.json registre seu atalho 
+## Documentação
 
-![image](https://user-images.githubusercontent.com/12072278/125504032-320c2b4d-e1ab-4793-92fa-67ad610bc9b7.png)
+- [`FEATURES.md`](./FEATURES.md) — comportamento alvo (versão Angular anterior)
+- [`IMPLEMENTATION_PLAN.md`](./IMPLEMENTATION_PLAN.md) — fases da reescrita
+- [`docs/IDEIAS_E_MELHORIAS.md`](docs/IDEIAS_E_MELHORIAS.md) — ideias futuras (ícones no campo, auto vs manual, loja)
 
-- Em models > commandType-enum.ts registre seu atalho com o mesmo nome utilizado no manifest.js. Esse enum é utilzado para facilitar a leitura e utilização dos atalhos no código
+## Atalhos globais
 
-![image](https://user-images.githubusercontent.com/12072278/125504266-6ec4ad53-6546-467e-b7ca-ff13ba741d66.png)
+Após instalar, **Ctrl+Shift+1–4** (no macOS, combinações sugeridas com **Command**) geram e **copiam** CPF, CNPJ, nome ou GUID, sem abrir o popup. Personalize em `chrome://extensions` → **Atalhos**.
 
-- Estamos utilizando um background service para capturar os atalhos quando precinados no teclado, adiciona a condição do seu atalho e qual função será executada 
+As regras oficiais do Chrome **não mudaram** em traços gerais: atalhos **globais** só podem ser sugeridos como **`Ctrl+Shift+0`–`9`** (medida de segurança). Ver [documentação `commands`](https://developer.chrome.com/docs/extensions/reference/api/commands).
 
-![image](https://user-images.githubusercontent.com/12072278/125504497-9bb904b7-d103-4514-8734-e2c57b804461.png)
+### Se o atalho “não faz nada”
 
-- Estamos organizando o projeto por modulo/feature conforme a imagem abaixo
+1. Em **Extensões → Atalhos**, confirme que o comando não está **em branco** e que não há conflito com outra extensão.
+2. **ChromeOS** não suporta comandos globais (`global: true`).
+3. O **service worker** não tem documento focado: `navigator.clipboard` **costuma falhar** lá; os atalhos copiam via **documento offscreen** (com retry e `execCommand` de reserva). Faça **`npm run build`** e **Recarregar** a extensão após actualizar o código.
 
-![image](https://user-images.githubusercontent.com/12072278/125511368-cdfc0b18-520c-4bcb-b39f-31002508fe96.png)
+## Permissões
 
+- **`clipboardWrite`** — copiar valores gerados.
+- **`offscreen`** — documento invisível com motivo `CLIPBOARD` usado para escrever na área de transferência a partir dos **atalhos** (fluxo fiável em MV3).
 
-## Extensão na Chrome Web Store
+## Estrutura
 
-https://chrome.google.com/webstore/detail/fake-data-easy/nkdncmpmmhpdngfjbghlebjfncemheij?hl=pt-BR
+```
+popup/          — menu principal
+pages/          — opções CPF / CNPJ / Nome
+offscreen/      — fallback de clipboard (MV3)
+src/background/ — service worker + comandos
+src/lib/        — geradores e utilitários
+public/         — manifest + ícones (copiados para dist/)
+```
 
-## Material de Apoio
+## Chrome Web Store
 
-https://medium.com/angular-in-depth/chrome-extension-with-angular-why-and-how-778200b87575
+- Guia completo: [`docs/CHROME_WEB_STORE.md`](docs/CHROME_WEB_STORE.md) (checklist, política de privacidade, justificativas das permissões).
+- Política de privacidade (publique num URL HTTPS, p.ex. raw do GitHub): [`PRIVACY.md`](PRIVACY.md).
 
+Gerar o **ZIP** de submissão (faz build e cria `fake-data-easy-chrome-<versão>.zip` na raiz desta pasta):
+
+```bash
+npm run zip
+```
+
+O ZIP contém o **interior** de `dist/` na raiz (com `manifest.json` no topo), como a loja exige.
