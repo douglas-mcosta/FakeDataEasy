@@ -28,6 +28,10 @@ npm run dev
 2. Ative **Modo do programador**
 3. **Carregar sem compactação** → escolha a pasta **`dist`**
 
+## Site estático (marketing / privacidade)
+
+- Pasta [`site/`](./site/) — HTML estático (início, sobre, privacidade). **Não** faz parte do build da extensão; serve para GitHub Pages ou pré-visualização com **`npm run site:serve`**. Ver [`site/README.md`](./site/README.md).
+
 ## Documentação
 
 - [`FEATURES.md`](./FEATURES.md) — comportamento alvo (versão Angular anterior)

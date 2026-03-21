@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" href="assets/logo-icon.svg" type="image/svg+xml" />
+    <meta
+      name="description"
+      content="Privacidade do Fake Data Easy: dados locais, permissões do Chrome e como a extensão opera sem enviar informações para servidores próprios."
+    />
+    <title>Privacidade · Fake Data Easy</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="index.html" aria-label="Fake Data Easy, início">
+          <img src="assets/logo-icon.svg" alt="" width="36" height="36" />
+          <span class="brand-wordmark" translate="no"><span class="brand-md">Fake</span><span class="brand-suite"> Data Easy</span></span>
+        </a>
+        <nav class="nav" aria-label="Principal">
+          <a href="index.html">Início</a>
+          <a href="recursos.html">Recursos</a>
+          <a href="instalar.html">Instalar</a>
+          <a href="sobre.html">Sobre</a>
+          <a href="privacidade.html" aria-current="page">Privacidade</a>
+        </nav>
+        <a class="btn btn-primary btn-nav" href="instalar.html">Instalar</a>
+      </div>
+    </header>
+
+    <main id="conteudo" class="main--wide">
+      <section class="privacy-hero" aria-labelledby="privacy-title">
+        <div class="privacy-hero__inner">
+          <div class="privacy-hero__copy">
+            <p class="eyebrow">
+              <span class="tag">Privacidade</span>
+              <span class="tag tag--success">Atualizado em março de 2026</span>
+            </p>
+            <h1 id="privacy-title">Privacidade explicada de forma objetiva, sem juridiquês desnecessário</h1>
+            <p class="lead">
+              Esta página resume como o <strong>Fake Data Easy</strong> lida com geração local, permissões do Chrome e armazenamento de preferências.
+              O ponto central continua o mesmo: funcionar sem depender de backend próprio para o fluxo principal.
+            </p>
+          </div>
+
+          <div class="privacy-hero__panel">
+            <div class="privacy-bullets">
+              <article class="privacy-bullet">
+                <strong>Geração local</strong>
+                <span>Os dados fictícios são gerados no dispositivo, não em servidores do autor.</span>
+              </article>
+              <article class="privacy-bullet">
+                <strong>Sem telemetria integrada</strong>
+                <span>A extensão não envia analytics nem coleta uso para terceiros.</span>
+              </article>
+              <article class="privacy-bullet">
+                <strong>Permissões com finalidade clara</strong>
+                <span>Cada permissão existe para popup, atalhos, helper opcional ou preferências locais.</span>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="feature-grid feature-grid--primary">
+          <article class="card card--highlight">
+            <div class="card-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg></div>
+            <h3>Resumo</h3>
+            <p>O Fake Data Easy gera valores fictícios localmente, salva preferências no navegador e não depende de login ou conta para o uso principal.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" /></svg></div>
+            <h3>O que não fazemos</h3>
+            <p>Não vendemos dados, não exigimos cadastro e não enviamos para servidores próprios os valores gerados, o conteúdo das páginas ou o que você copia.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2" /></svg></div>
+            <h3>Atualizações</h3>
+            <p>Se novos recursos exigirem mudanças nesta política ou em permissões declaradas, este site e o arquivo <code>PRIVACY.md</code> serão atualizados.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section--muted" aria-labelledby="privacy-detail-title">
+        <div class="section-head">
+          <h2 id="privacy-detail-title">Mais contexto, sem complicar</h2>
+          <p>Abaixo estão os pontos principais do comportamento da extensão, alinhados ao documento de privacidade do repositório.</p>
+        </div>
+        <article class="prose-shell">
+          <h2>Dados e rede</h2>
+          <ul>
+            <li>Não há contas, login nem telemetria embutida na extensão.</li>
+            <li>Os valores gerados e copiados existem no fluxo local do navegador.</li>
+            <li>Não há carregamento remoto de scripts para o funcionamento principal da extensão.</li>
+          </ul>
+
+          <h2>Permissões do Chrome</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Permissão</th>
+                <th>Finalidade</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>activeTab</strong></td>
+                <td>Ler o URL da aba atual ao adicionar um site e permitir ações sob gesto explícito do usuário.</td>
+              </tr>
+              <tr>
+                <td><strong>scripting</strong></td>
+                <td>Registrar o helper apenas nos hosts autorizados pelo usuário.</td>
+              </tr>
+              <tr>
+                <td><strong>storage</strong></td>
+                <td>Salvar localmente lista de sites, tema, preferências do helper e dados de sessão para exportação.</td>
+              </tr>
+              <tr>
+                <td><strong>clipboardWrite</strong></td>
+                <td>Copiar para a área de transferência o valor que acabou de ser gerado.</td>
+              </tr>
+              <tr>
+                <td><strong>offscreen</strong></td>
+                <td>Suportar cópia confiável a partir do service worker em atalhos globais.</td>
+              </tr>
+              <tr>
+                <td><strong>tabs</strong></td>
+                <td>Abrir a página de opções quando o usuário escolhe configurar ou gerenciar a lista.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>Helper nos campos</h2>
+          <p>O helper só roda nas origens da sua lista e pode ser desligado totalmente. Ele usa atributos do campo localmente para heurísticas e regras definidas por você, sem transmitir esse conteúdo para servidores externos.</p>
+
+          <h2>Armazenamento local</h2>
+          <p>As informações ficam no <code>chrome.storage.local</code> do perfil do navegador até você limpar os dados da extensão ou desinstalá-la.</p>
+
+          <h2>Contato</h2>
+          <p>
+            Questões sobre privacidade podem ser enviadas pelo
+            <a href="https://github.com/douglas-mcosta/FakeDataEasy/issues" target="_blank" rel="noopener noreferrer">GitHub Issues</a>
+            ou pelos canais públicos da Chrome Web Store.
+          </p>
+        </article>
+      </section>
+
+      <section class="cta-band" aria-labelledby="privacy-cta-title">
+        <h2 id="privacy-cta-title">Privacidade clara faz parte da proposta do produto</h2>
+        <p>Se o fluxo faz sentido para você, o próximo passo é instalar e usar o Fake Data Easy no Chrome.</p>
+        <a class="btn btn-primary btn-lg" href="instalar.html">Ver instalação</a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p>© Fake Data Easy</p>
+        <nav aria-label="Rodapé">
+          <a href="instalar.html">Instalar</a>
+          <a href="sobre.html">Sobre</a>
+          <a href="index.html">Início</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

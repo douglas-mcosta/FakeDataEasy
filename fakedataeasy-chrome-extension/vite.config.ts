@@ -7,6 +7,12 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   base: './',
   publicDir: 'public',
+  /** Pasta `site/` — site estático (GitHub Pages); não entra no bundle nem em `dist/`. */
+  server: {
+    watch: {
+      ignored: ['**/site/**'],
+    },
+  },
   build: {
     outDir: 'dist',
     emptyOutDir: true,

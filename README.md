@@ -65,6 +65,7 @@ FakeDataEasy/
     ├── src/content/                   helper nos campos
     ├── src/lib/                       geradores, heurísticas, storage
     ├── PRIVACY.md                     política para utilizadores e revisão da loja
+    ├── site/                          site estático (GitHub Pages); fora do npm build da extensão
     └── docs/
         ├── CHROME_WEB_STORE.md        checklist, Data safety, justificativas
         └── IDEIAS_E_MELHORIAS.md      ideias e estado de implementação
@@ -77,6 +78,7 @@ FakeDataEasy/
 - [README da extensão](fakedataeasy-chrome-extension/README.md) — permissões, estrutura técnica, problemas com atalhos.
 - [CHROME_WEB_STORE.md](fakedataeasy-chrome-extension/docs/CHROME_WEB_STORE.md) — submissão, ZIP, textos para o painel.
 - [PRIVACY.md](fakedataeasy-chrome-extension/PRIVACY.md) — dados, rede, permissões; usa um URL HTTPS estável (ex.: *raw* no GitHub) no formulário da loja.
+- [site/](fakedataeasy-chrome-extension/site/) — páginas HTML (sobre, privacidade) para GitHub Pages; ver [site/README.md](fakedataeasy-chrome-extension/site/README.md).
 - [IDEIAS_E_MELHORIAS.md](fakedataeasy-chrome-extension/docs/IDEIAS_E_MELHORIAS.md) — roadmap e contexto de produto.
 - [IMPLEMENTATION_PLAN.md](fakedataeasy-chrome-extension/IMPLEMENTATION_PLAN.md) — notas da reescrita MV3.
 
